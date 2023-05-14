@@ -7,49 +7,65 @@ const service = new ProductsService();
 
 
 
-router.get('/', (req, res) => {
-  const products = service.find();
-   res.json(products);
-
+router.get('/', async (req, res) => {
+  const products = await service.find();
+   res.status(200).json(products);
   });
 
-  router.get('/:id',  (req, res) => {
-    const { id } = req.params;
-    const product = service.findOne(id);
-    if(!id) {
-      res.status(404).json({
-        message: 'not found'
-      })
-    } else {
+  router.get('/:id',  async (req, res) => {
+    try {
+      const { id } = req.params;
+    const product = await service.findOne(id);
 
       res.status(200).json(product);
+    } catch(error) {
+      res.status(404).json({
+        message: error.message
+      });
     }
-    });
+  });
 
-  router.post('/', (req, res) => {
+
+  router.post('/', async (req, res) => {
+       try {
         const body = req.body;
-    res.status(201).json({
-      message: 'created',
-      data: body,
-     });
+        const newProduct = await service.create(body);
+
+    res.status(201).json(newProduct);
+  } catch(error) {
+    res.status(404).json({
+      message: error.message
+    });
+  }
   });
 
-  router.patch('/:id', (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
-    res.json({
-      message: 'updated',
-      data: body,
-      id,
-    });
+  router.patch('/:id', async (req, res) => {
+ try {
+  const { id } = req.params;
+  const body = req.body;
+
+  const productUpdate = await service.update(id, body);
+
+  res.json(productUpdate);
+ } catch (error) {
+  res.status(404).json({
+    message: error.message
   });
 
-  router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-    res.json({
-      message: 'deleted',
-      id
+ }
+  });
+
+  router.delete('/:id', async (req, res) => {
+   try {
+      const { id } = req.params;
+    const product = await service.delete(id);
+
+    res.json(product);
+  } catch(error) {
+    res.status(404).json({
+      message: error.message
     });
+  }
   });
 
   module.exports = router;

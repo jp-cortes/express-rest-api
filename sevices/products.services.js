@@ -1,54 +1,61 @@
 const { faker } = require('@faker-js/faker');
 
+
 class ProductsService {
-  construtor() {
+  constructor() {
     this.products = [];
     this.generate();
   }
 
-  generate() {
+  async generate() {
     const limit = 100;
     for( let i = 0; i < limit; i++) {
       this.products.push({
         // eslint-disable-next-line no-undef
-        id: crypto.randomUUID(),
+        id: faker.string.uuid(),
         name: faker.commerce.productName(),
-        price: parseInt(faker.commerce.price()),
+        price: parseInt(faker.commerce.price(), 10),
         image: faker.image.url(),
         description: faker.commerce.productDescription(),
-        category:  faker.commerce.department()
+        category:  faker.commerce.department().toLowerCase(),
       });
     }
 
   }
 
-  create(data) {
+  async create(data) {
     const newProduct = {
       // eslint-disable-next-line no-undef
-      id: crypto.randomUUID(),
+      id: faker.string.uuid(),
       ...data
     }
      this.products.push(newProduct);
      return newProduct;
   }
 
-  find() {
+  async find() {
     return this.products;
   }
 
-  findOne(id) {
-    return this.products.find((item) => item.id === id);
+  async findOne(id) {
+    const product = this.products.find((item) => item.id === id);
+
+    if(product === undefined) {
+      throw new Error('Product not found');
+    }
+    return product;
   }
 
-  categories() {
-    return this.products.map((items) => items.category);
+  async categories() {
+      return this.products.map((items) => items.category);
+
   }
 
-  findByCategory(category) {
+  async findByCategory(category) {
     return this.products.filter((item) => item.category === category);
   }
 
-  update(id, changes) {
+  async update(id, changes) {
     const index = this.products.findIndex((item) => item.id === id);
     if(index === -1) {
       throw new Error('Product not found');
@@ -62,7 +69,7 @@ class ProductsService {
     return this.products[index];
   }
 
-  delete(id) {
+  async delete(id) {
     const index = this.products.findIndex((item) => item.id === id);
     if(index === -1) {
       throw new Error('Product not found');
@@ -71,5 +78,6 @@ class ProductsService {
     return { id };
   }
 }
+
 
 module.exports = ProductsService;

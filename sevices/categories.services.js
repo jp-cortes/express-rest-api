@@ -1,4 +1,3 @@
-const { faker } = require('@faker-js/faker');
 const ProductsService = require('./products.services');
 
 class CategoriesService extends ProductsService{
@@ -6,11 +5,11 @@ class CategoriesService extends ProductsService{
     super();
   }
 
-  findCategories() {
+  async allCategories() {
     return this.categories()
   }
 
-  filterByCategory(category) {
+  async productsByCategory(category) {
     return this.findByCategory(category);
   }
 
