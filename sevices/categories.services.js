@@ -1,4 +1,5 @@
 const ProductsService = require('./products.services');
+const boom = require("@hapi/boom");
 
 class CategoriesService extends ProductsService{
   constructor() {
@@ -10,7 +11,12 @@ class CategoriesService extends ProductsService{
   }
 
   async productsByCategory(category) {
-    return this.findByCategory(category);
+    const product = this.findByCategory(category);
+    if(product.length) {
+      throw boom.notFound('Category not found');
+    }
+
+    return product;
   }
 
 }

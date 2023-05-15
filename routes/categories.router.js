@@ -4,21 +4,19 @@ const router = express.Router();
 const category = new CategoriesService();
 
 
-router.get('/',  async (req, res) => {
+router.get('/', async (req, res) => {
   const categories = await category.allCategories();
   res.json(categories);
-})
+});
 
-router.get('/:id',  async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-  const productByCategory = await category.productsByCategory(id);
-  res.json(productByCategory);
-} catch(error) {
-  res.status(404).json({
-    message: error.message
-  });
-}
+    const productByCategory = await category.productsByCategory(id);
+    res.json(productByCategory);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
