@@ -10,7 +10,7 @@ const country = Joi.string().min(3);
 const city = Joi.string().min(4).max(20);
 const address = Joi.string().min(4).max(20);
 const paymentMethods = Joi.object({
-  card: Joi.string().alphanum().min(16).max(16)
+  card: Joi.string().alphanum().min(16).max(16),
 });
 
 

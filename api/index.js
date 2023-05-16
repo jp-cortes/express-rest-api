@@ -1,6 +1,6 @@
 
-require('dotenv').config({path: './.env'});
-const cors = require('cors');
+require('dotenv').config({path: './.env'});// first read the  .env variables
+const cors = require('cors');// validate routes
 const express = require('express');
 const routerApi = require('./routes');
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
@@ -8,7 +8,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 
@@ -25,13 +25,12 @@ const options = {
   }
 }
 
-// app.use(cors(options)); //access fot the specific url
+app.use(cors(options)); //access fot the specific url
 
-app.use(cors());// access for everyone
 
 
 app.get('api/', (req, res) => {
-  res.send('Ecommerce rest api');
+  res.send('Ecommerce REST API');
 });
 
 routerApi(app);

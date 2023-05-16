@@ -6,11 +6,13 @@ const { createUserSchema, updateUserSchema, getUserSchema } = require('../schema
 const router = express.Router();
 const service = new UsersService();
 
+//all users
 router.get('/', async (req, res) => {
   const users = await service.find();
   res.json(users);
 });
 
+//user by id
 router.get('/:id',
 validatorHandler(getUserSchema, 'params'),
  async (req, res, next) => {
@@ -19,13 +21,11 @@ validatorHandler(getUserSchema, 'params'),
     const user = await service.findById(id);
     res.status(200).json(user);
   } catch (error) {
-    // res.status(404).json({
-    //   message: error.message,
-    // });
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
 });
 
+//create a user
 router.post('/',
 validatorHandler(createUserSchema, 'body'),
 async (req, res, next) => {
@@ -34,10 +34,12 @@ async (req, res, next) => {
     const newUser = await service.create(body);
     res.status(201).json(newUser);
   } catch (error) {
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
 });
 
+
+//update an user
 router.patch('/:id',
 validatorHandler(getUserSchema, 'params'),
 validatorHandler(updateUserSchema, 'body'),
@@ -49,10 +51,11 @@ async (req, res, next) => {
 
     res.json(user);
   } catch (error) {
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
 });
 
+//delete an user
 router.delete('/:id',
 validatorHandler(getUserSchema, 'params'),
 async (req, res, next) => {
@@ -62,22 +65,8 @@ async (req, res, next) => {
 
     res.json(user);
   } catch (error) {
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
 });
-
-//?limit=10&offset=10
-// router.get('/', (req, res) => {
-//   const { limit, offset } = req.query;
-//   if(limit && offset) {
-//     res.send({
-//       limit,
-//       offset
-//     });
-
-//   } else {
-//     res.send('No parameters')
-//   }
-// });
 
 module.exports = router;

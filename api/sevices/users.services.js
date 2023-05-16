@@ -9,7 +9,7 @@ class UsersService {
 
 
   async generate() {
-    const limit = 10;
+    const limit = 5;
     for( let i = 0; i < limit; i++) {
       this.users.push({
         id: faker.string.uuid(),
@@ -22,18 +22,15 @@ class UsersService {
         address: faker.location.streetAddress(),
         paymentMethods: {
           card: faker.finance.creditCardNumber(),
-      }
+      },
+        password: faker.internet.password(),
 
       });
     }
   }
 
   async find() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.users);
-      }, 3000);
-    })
+    return this.users;
   }
 
   async create(data) {

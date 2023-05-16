@@ -8,12 +8,13 @@ const router = express.Router();
 const service = new ProductsService();
 
 
-
+//all products
 router.get('/', async (req, res) => {
   const products = await service.find();
    res.status(200).json(products);
   });
 
+  //product by id
   router.get('/:id',
   validatorHandler(getProductSchema, 'params'),
    async (req, res, next) => {
@@ -23,14 +24,11 @@ router.get('/', async (req, res) => {
 
       res.status(200).json(product);
     } catch(error) {
-      // res.status(404).json({
-      //   message: error.message
-      // });
       next(error);// will show the error from the middleware folder
     }
   });
 
-
+//create products
   router.post('/',
   validatorHandler(createProductSchema, 'body'),
    async (req, res, next) => {
@@ -44,6 +42,7 @@ router.get('/', async (req, res) => {
   }
   });
 
+  //update a product
   router.patch('/:id',
   validatorHandler(getProductSchema, 'params'),
   validatorHandler(updateProductSchema, 'body'),
@@ -61,6 +60,8 @@ router.get('/', async (req, res) => {
  }
   });
 
+
+  //delete a product
   router.delete('/:id',
   validatorHandler(getProductSchema, 'params'),
   async (req, res, next) => {
