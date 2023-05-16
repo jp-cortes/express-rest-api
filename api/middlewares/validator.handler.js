@@ -1,6 +1,7 @@
 const boom = require('@hapi/boom');
 
 function validatorHandler(schema, property) {
+  //schema will validate the schemas placed on folder schemas
   return (req, res, next) => {
     const data = req[property];
     const { error } = schema.validate(data, { abortEarly: false });
@@ -8,7 +9,7 @@ function validatorHandler(schema, property) {
     if(error) {
       next(boom.badRequest(error));
     }
-      next();
+      next(); //if there is no error keep going
   }
 }
 

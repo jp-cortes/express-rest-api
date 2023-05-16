@@ -96,6 +96,9 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
+# VS code plugins
+.vscode
+
 # Optional npm cache directory
 .npm
 

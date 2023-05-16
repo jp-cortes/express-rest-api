@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+//valiadation for products
+
 const id = Joi.string().uuid();
 const name = Joi.string().min(5).max(20);
 const price = Joi.number().integer().min(10);

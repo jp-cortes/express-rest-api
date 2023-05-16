@@ -15,7 +15,7 @@ class UsersService {
         id: faker.string.uuid(),
         name: faker.person.firstName(),
         lastname: faker.person.lastName(),
-        email: `${faker.hacker.noun()}@mail.com`,
+        email: faker.internet.email(),
         image: faker.image.avatar(),
         country: faker.location.country(),
         city: faker.location.city(),

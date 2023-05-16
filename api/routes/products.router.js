@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
       // res.status(404).json({
       //   message: error.message
       // });
-      next(error);
+      next(error);// will show the error from the middleware folder
     }
   });
 
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
     res.status(201).json(newProduct);
   } catch(error) {
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
   });
 
@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
 
   res.json(productUpdate);
  } catch (error) {
-  next(error);
+  next(error);// will show the error from the middleware folder
 
  }
   });
@@ -70,7 +70,7 @@ router.get('/', async (req, res) => {
 
     res.json(product);
   } catch(error) {
-    next(error);
+    next(error);// will show the error from the middleware folder
   }
   });
 
