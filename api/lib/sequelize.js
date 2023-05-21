@@ -1,13 +1,20 @@
-const { Pool } = require('pg');
-//prevent creating a differen client  on every connection
+const { Sequelize } = require('sequelize');
+
 const { config } = require('./../config/config');
+const setupModels = require('../dataBase');
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
 
-  const pool = new Pool({ connectionString: URI });
+const sequelize = new Sequelize(URI, {
+  dialect: 'postgres',
+  logging: true,
+});
+
+setupModels(sequelize);
+
+sequelize.sync();
 
 
-
-module.exports = pool;
+module.exports = sequelize;
