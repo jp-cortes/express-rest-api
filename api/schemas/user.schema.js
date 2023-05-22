@@ -15,13 +15,13 @@ const paymentMethods = Joi.object({
 
 
 const createUserSchema = Joi.object({
-  name: name.required(),
-  lastname: lastname.required(),
-  image: image.required(),
-  country: country.required(),
-  city: city.required(),
-  address: address.required(),
-  paymentMethods: paymentMethods.required(),
+  // name: name.required(),
+  // lastname: lastname.required(),
+  // image: image.required(),
+  // country: country.required(),
+  // city: city.required(),
+  // address: address.required(),
+  // paymentMethods: paymentMethods.required(),
 });
 
 const updateUserSchema = Joi.object({
