@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+const { ValidationError } = require('sequelize');
 // create function to  reach a middleware error type
 function logErrors( error, req, res, next) {
   //show the error in server  for monitoring
@@ -31,6 +32,17 @@ if(error.isBoom) {// boom libray add the property IsBoom
 
 }
 
+function ormErrorhandler(error, req, res, next) {
+  if(error instanceof ValidationError) {
+    res.status(409).json({
+      statusCode: 409,
+      message: error.name,
+      errors: error.errors
+    })
+  }
+  next(error);
+}
 
 
-module.exports = { logErrors, errorHandler, boomErrorHandler };
+
+module.exports = { logErrors, errorHandler, boomErrorHandler, ormErrorhandler };

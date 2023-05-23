@@ -3,7 +3,7 @@ require('dotenv').config({path: './.env'});// first read the  .env variables
 const cors = require('cors');// validate routes
 const express = require('express');
 const routerApi = require('./routes');
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
+const { logErrors, errorHandler, boomErrorHandler, ormErrorhandler } = require('./middlewares/error.handler');
 
 
 
@@ -37,6 +37,7 @@ app.get('api/', (req, res) => {
 routerApi(app);
 
 app.use(logErrors);
+app.use(ormErrorhandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 

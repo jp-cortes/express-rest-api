@@ -3,16 +3,17 @@ const Joi = require('joi');
 //validation for users
 
 const id = Joi.string().uuid();
-const name = Joi.string().min(5).max(20);
-const lastname = Joi.string().min(5).max(20);
-const image = Joi.string();
-const country = Joi.string().min(3);
-const city = Joi.string().min(4).max(20);
-const address = Joi.string().min(4).max(20);
-const paymentMethods = Joi.object({
-  card: Joi.string().alphanum().min(16).max(16),
-});
-
+// const name = Joi.string().min(5).max(20);
+// const lastname = Joi.string().min(5).max(20);
+// const image = Joi.string();
+// const country = Joi.string().min(3);
+// const city = Joi.string().min(4).max(20);
+// const address = Joi.string().min(4).max(20);
+// const paymentMethods = Joi.object({
+//   card: Joi.string().alphanum().min(16).max(16),
+// });
+const email = Joi.string()
+const password = Joi.string()
 
 const createUserSchema = Joi.object({
   // name: name.required(),
@@ -22,16 +23,20 @@ const createUserSchema = Joi.object({
   // city: city.required(),
   // address: address.required(),
   // paymentMethods: paymentMethods.required(),
+  email: email.required(),
+  password: password.required(),
 });
 
 const updateUserSchema = Joi.object({
-  name: name,
-  lastname: lastname,
-  image: image,
-  country: country,
-  city: city,
-  address: address,
-  paymentMethods: paymentMethods,
+  // name: name,
+  // lastname: lastname,
+  // image: image,
+  // country: country,
+  // city: city,
+  // address: address,
+  // paymentMethods: paymentMethods,
+  email: email,
+
 });
 
 const getUserSchema = Joi.object({
