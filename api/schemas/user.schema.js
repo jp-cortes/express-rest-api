@@ -14,6 +14,7 @@ const id = Joi.string().uuid();
 // });
 const email = Joi.string()
 const password = Joi.string()
+const role = Joi.string().min(5)
 
 const createUserSchema = Joi.object({
   // name: name.required(),
@@ -25,6 +26,7 @@ const createUserSchema = Joi.object({
   // paymentMethods: paymentMethods.required(),
   email: email.required(),
   password: password.required(),
+  role: role.required()
 });
 
 const updateUserSchema = Joi.object({
@@ -36,6 +38,7 @@ const updateUserSchema = Joi.object({
   // address: address,
   // paymentMethods: paymentMethods,
   email: email,
+  role: role
 
 });
 
