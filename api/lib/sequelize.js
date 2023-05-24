@@ -10,7 +10,7 @@ const URI = `mysql://${USER}:${PASSWORD}@${mySqlConfig.dbHost}:${mySqlConfig.dbP
 
 const sequelize = new Sequelize(URI, {
   dialect: 'mysql',
-  logging: true,
+  // logging: true,
 });
 
 setupModels(sequelize);
