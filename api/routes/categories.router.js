@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const productByCategory = await category.productsByCategory(id);
+    const productByCategory = await category.findProductsByCategory(id);
     res.json(productByCategory);
   } catch (error) {
     next(error);

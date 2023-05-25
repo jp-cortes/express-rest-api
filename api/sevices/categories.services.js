@@ -1,22 +1,28 @@
 const ProductsService = require('./products.services');
+const { models } = require('../lib/sequelize');
 const boom = require("@hapi/boom");
 
-class CategoriesService extends ProductsService{
+class CategoriesService extends ProductsService {
   constructor() {
     super();
   }
 
   async allCategories() {
-    return this.categories()
+    const response = await models.Category.findAll();
+    return response;
   }
 
-  async productsByCategory(category) {
-    const product = this.findByCategory(category);
-    if(product.length) {
-      throw boom.notFound('Category not found');
+  async findById(id) {
+    const product = models.Category.findByPk(id);
+    if(!product) {
+      throw boom.notFound('product not found');
     }
-
     return product;
+  }
+
+  async findProductsByCategory(categoryId) {
+    const category = await this.findByCategory(categoryId)
+    return category;
   }
 
 }
