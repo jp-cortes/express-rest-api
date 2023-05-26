@@ -1,14 +1,14 @@
 const Joi = require('joi');
-
+const { createUserSchema, updateUserSchema } = require('./user.schema')
 //validation for customers
 
 const id = Joi.number().integer();
-const name = Joi.string().min(5).max(20);
-const lastname = Joi.string().min(5).max(20);
+const name = Joi.string().min(3).max(20);
+const lastname = Joi.string().min(3).max(20);
 const phone = Joi.number().integer();
 const userId = Joi.number().integer();
-const email = Joi.string()
-const password = Joi.string()
+// const email = Joi.string()
+// const password = Joi.string()
 // const image = Joi.string();
 // const country = Joi.string().min(3);
 // const city = Joi.string().min(4).max(20);
@@ -19,12 +19,10 @@ const password = Joi.string()
 
 const createCustomerSchema = Joi.object({
   name: name.required(),
-  lastname: lastname.required(),
+  lastName: lastname.required(),
   phone: phone.required(),
-  user: Joi.object({
-    email: email.required(),
-    password: password.required(),
-  }),
+  user: createUserSchema
+
   // image: image.required(),
   // country: country.required(),
   // city: city.required(),
@@ -34,10 +32,11 @@ const createCustomerSchema = Joi.object({
 });
 
 const updateCustomerSchema = Joi.object({
-  name,
-  lastname,
-  phone,
-  userId,
+  name: name,
+  lastName: lastname,
+  phone: phone,
+  user: updateUserSchema,
+  userId: userId,
   // name: name,
   // lastname: lastname,
   // image: image,

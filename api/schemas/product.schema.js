@@ -7,7 +7,7 @@ const name = Joi.string().min(5).max(20);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
 const description = Joi.string().min(10);
-const category = Joi.string().min(4).max(20);
+const categoryId = Joi.number().integer();
 
 
 const createProductSchema = Joi.object({
@@ -15,7 +15,7 @@ const createProductSchema = Joi.object({
   price: price.required(),
   image: image.required(),
   description: description.required(),
-  category: category.required(),
+  categoryId: categoryId.required(),
 });
 
 const updateProductSchema = Joi.object({
@@ -23,7 +23,7 @@ const updateProductSchema = Joi.object({
   price: price,
   image: image,
   description: description,
-  category: category,
+  categoryId: categoryId,
 });
 
 const getProductSchema = Joi.object({

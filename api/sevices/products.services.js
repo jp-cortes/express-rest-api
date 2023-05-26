@@ -1,13 +1,25 @@
 const boom = require('@hapi/boom');
 const { models } = require('../lib/sequelize');
 // const pool = require('../lib/postgres.pool');
-
+const { faker } = require('@faker-js/faker')
 class ProductsService {
   constructor() {}
 
-
+  generate() {
+    const limit = 100;
+    for (let index = 0; index < limit; index++) {
+      this.products.push({
+        name: faker.commerce.productName(),
+        price: parseInt(faker.commerce.price(), 10),
+        image: faker.image.url(),
+        description: faker.commerce.productDescription()
+      });
+    }
+  }
   async find() {
-    const response = await models.Product.findAll();
+    const response = await models.Product.findAll({
+      include: ['category']
+    });
     return response;
     // return this.users;
   }
@@ -38,18 +50,7 @@ class ProductsService {
   }
 
 
-   async findByCategory(categoryId) {
-    const category = models.Product.findAll({
-      where:{
-        'category_id': categoryId
-      }
-    });
 
-    if(!category) {
-      throw boom.notFound('category not found');
-    }
-    return category;
-  }
 }
 
 
