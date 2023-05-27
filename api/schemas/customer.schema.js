@@ -7,8 +7,6 @@ const name = Joi.string().min(3).max(20);
 const lastname = Joi.string().min(3).max(20);
 const phone = Joi.number().integer();
 const userId = Joi.number().integer();
-// const email = Joi.string()
-// const password = Joi.string()
 // const image = Joi.string();
 // const country = Joi.string().min(3);
 // const city = Joi.string().min(4).max(20);
@@ -37,8 +35,6 @@ const updateCustomerSchema = Joi.object({
   phone: phone,
   user: updateUserSchema,
   userId: userId,
-  // name: name,
-  // lastname: lastname,
   // image: image,
   // country: country,
   // city: city,

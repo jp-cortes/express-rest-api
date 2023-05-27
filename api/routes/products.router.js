@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
    async (req, res, next) => {
     try {
       const { id } = req.params;
-    const product = await service.findOne(id);
+    const product = await service.findById(id);
 
       res.status(200).json(product);
     } catch(error) {

@@ -9,7 +9,6 @@ class CustomersService {
       include: ['user']
     });
     return response;
-    // return this.users;
   }
 
   async create(data) {
