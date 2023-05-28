@@ -2,12 +2,15 @@ const Joi = require('joi');
 
 //valiadation for products
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const name = Joi.string().min(5).max(20);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
 const description = Joi.string().min(10);
 const categoryId = Joi.number().integer();
+
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
 
 
 const createProductSchema = Joi.object({
@@ -19,6 +22,7 @@ const createProductSchema = Joi.object({
 });
 
 const updateProductSchema = Joi.object({
+  id: id,
   name: name,
   price: price,
   image: image,
@@ -30,4 +34,9 @@ const getProductSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema};
+const queryProductSchema = Joi.object({
+  limit: limit,
+  offset: offset
+});
+
+module.exports = { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema };

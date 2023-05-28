@@ -16,19 +16,28 @@ class ProductsService {
       });
     }
   }
-  async find() {
-    const response = await models.Product.findAll({
-      include: ['category']
-    });
-    return response;
-    // return this.users;
-  }
 
+  //find  all products
+  async find(query) {
+    const options = {
+      include: ['category']
+    }
+    const { limit, offset } = query;
+
+    if(limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const response = await models.Product.findAll(options);
+    return response;
+  }
+//create product
   async create(data) {
     const newProduct = await models.Product.create(data);
     return newProduct;
   }
-
+//find product by id
   async findById(id) {
     const product = models.Product.findByPk(id);
     if(!product) {
@@ -36,17 +45,17 @@ class ProductsService {
     }
     return product;
   }
-
+//update product
   async update(id, changes) {
     const product = await this.findById(id);
     const response = product.update(changes);
     return response;
   }
-
+//delete product
   async delete(id) {
     const product = await this.findById(id);
     await product.destroy();
-    return { id };
+    return { res: true };
   }
 
 

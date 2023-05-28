@@ -4,16 +4,17 @@ const boom = require("@hapi/boom");
 
 class CategoriesService{
   constructor() {  }
-
+// create category
   async create(data) {
     const newCategory = await models.Category.create(data);
     return newCategory;
   }
+  // find all caregories
   async find() {
     const response = await models.Category.findAll();
     return response;
   }
-
+// product by category id
   async findById(id) {
     const category = models.Category.findByPk(id, {
       include: ['products']
@@ -23,17 +24,17 @@ class CategoriesService{
     }
     return category;
   }
-
+//update category
   async update(id, changes) {
     const category = await this.findById(id);
     const response = category.update(changes);
     return response;
   }
-
+//delete category
   async delete(id) {
     const category = await this.findById(id);
     await category.destroy();
-    return { id };
+    return { res: true };
   }
 
 }

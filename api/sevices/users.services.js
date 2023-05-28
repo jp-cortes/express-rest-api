@@ -6,20 +6,19 @@ class UsersService {
 
 
 
-
+//find  all users
   async find() {
     const response = await models.User.findAll({
       include: ['customer']
     });
     return response;
-    // return this.users;
   }
-
+//create user
   async create(data) {
     const newUser = await models.User.create(data);
     return newUser;
   }
-
+//find  user by id
   async findById(id) {
     const user = models.User.findByPk(id);
     if(!user) {
@@ -27,13 +26,13 @@ class UsersService {
     }
     return user;
   }
-
+// update user
   async update(id, changes) {
     const user = await this.findById(id);
     const response = user.update(changes);
     return response;
   }
-
+// delete user
   async delete(id) {
     const user = await this.findById(id);
     await user.destroy();
