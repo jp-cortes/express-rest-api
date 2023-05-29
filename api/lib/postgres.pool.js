@@ -2,11 +2,22 @@ const { Pool } = require('pg');
 //prevent creating a differen client  on every connection
 const { config } = require('./../config/config');
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+const options = {};
 
-  const pool = new Pool({ connectionString: URI });
+if(config.isProd) {
+  options.connectionString = config.dbUrl;
+  options.ssl = {
+    rejectUnauthorized: false
+  };
+} else {
+  const USER = encodeURIComponent(config.dbUser);
+  const PASSWORD = encodeURIComponent(config.dbPassword);
+  const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+  options.connectionString = URI
+}
+
+
+  const pool = new Pool(options);
 
 
 
