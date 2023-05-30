@@ -1,11 +1,16 @@
-const { Pool } = require('pg');
-//prevent creating a differen client  on every connection
+require('dotenv').config({path: './.env'});
+
 const { config } = require('./../config/config');
+//prevent creating a differen client  on every connection
+
+const { Pool } = require('pg');
+
+const ProductionURI = process.env.DATABASE_URL;
 
 const options = {};
 
 if(config.isProd) {
-  options.connectionString = config.dbUrl;
+  options.connectionString = ProductionURI;
   options.ssl = {
     rejectUnauthorized: false
   };
