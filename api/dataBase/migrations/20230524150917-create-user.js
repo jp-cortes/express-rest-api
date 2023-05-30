@@ -16,6 +16,8 @@ module.exports = {
     await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
+
+    //N:N Entity Relationships
     await queryInterface.createTable(ORDER_TABLE, {
       id: {
         allowNull: false,
@@ -50,6 +52,7 @@ module.exports = {
       }
     }
     );
+
     await queryInterface.createTable(ORDER_PRODUCT_TABLE, OrderProductSchema);
   },
 
