@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js",
-    "migrations:generate":"sequelize-cli migration:generate --name",
-    "migrations:run":"sequelize-cli  db:migrate",
-    "migrations:revert":"sequelize-cli  db:migrate:undo",
-    "migrations:delete":"sequelize-cli  db:migrate:undo:all",
-    "migrations:debug":"sequelize-cli db:migrate --debug",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli  db:migrate",
+    "migrations:revert": "sequelize-cli  db:migrate:undo",
+    "migrations:delete": "sequelize-cli  db:migrate:undo:all",
+    "migrations:debug": "sequelize-cli db:migrate --debug",
     "lint": "eslint"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

@@ -1,7 +1,12 @@
+require('dotenv').config({path: './.env'});
+
 const { config } = require('../config/config');
 
 const { Sequelize } = require('sequelize');
 const setupModels = require('../dataBase/models');
+
+const URI = process.env.DATABASE_URL;
+
 
 const options = {
   dialect: 'postgres',
@@ -16,7 +21,7 @@ if(config.isProd) {
   };
 }
 
-const sequelize = new Sequelize(config.dbUrl, options);
+const sequelize = new Sequelize(URI, options);
 
 setupModels(sequelize);
 

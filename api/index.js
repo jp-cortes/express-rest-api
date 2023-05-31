@@ -4,6 +4,7 @@ const cors = require('cors');// validate routes
 const express = require('express');
 const routerApi = require('./routes');
 const { logErrors, errorHandler, boomErrorHandler, ormErrorhandler } = require('./middlewares/error.handler');
+const { checkApiKey } = require('./middlewares/auth.handler');
 
 
 
@@ -30,7 +31,7 @@ app.use(cors()); //access for all urls
 
 
 
-app.get('api/', (req, res) => {
+app.get('/', checkApiKey, (req, res) => {
   res.send('Ecommerce REST API');
 });
 
