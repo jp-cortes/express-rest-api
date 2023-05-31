@@ -196,6 +196,7 @@ $RECYCLE.BIN/
 
 # Docker
 db
+db_production
 db2
 # mySQL
 mysql_data
