@@ -29,7 +29,8 @@ const options = {
 // app.use(cors(options)); //access fot the specific url
 app.use(cors()); //access for all urls
 
-
+//user authorization
+require('./utils/auth');
 
 app.get('/', checkApiKey, (req, res) => {
   res.send('Ecommerce REST API');

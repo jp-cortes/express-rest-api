@@ -6,6 +6,7 @@ const boom = require("@hapi/boom");
 class CategoriesService{
   constructor() { }
   // find all caregories
+
   async find() {
     const response = await models.Category.findAll();
     return response;
