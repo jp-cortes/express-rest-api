@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');//authenticate jwt
 
-const CustomerService = require('../sevices/customers.services');
+const CustomerService = require('../services/customers.services');
 const validatorHandler = require('../middlewares/validator.handler');
 const { checkRoles } = require('../middlewares/auth.handler');
 const {
@@ -42,7 +42,7 @@ async (req, res, next) => {
 
 router.post('/',
   validatorHandler(createCustomerSchema, 'body'),
-  passport.authenticate('jwt', { session: false }),
+  // passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const body = req.body;

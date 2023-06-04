@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');//authenticate jwt
 
-const ProductsService = require('../sevices/products.services');
+const ProductsService = require('../services/products.services');
 const validatorHandler = require('../middlewares/validator.handler');
 const { checkRoles } = require('../middlewares/auth.handler');
 const {
