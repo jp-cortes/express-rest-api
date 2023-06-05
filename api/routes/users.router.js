@@ -3,6 +3,7 @@ const passport = require('passport');//authenticate jwt
 
 const UsersService = require('../services/users.services');
 const validatorHandler = require('../middlewares/validator.handler');
+
 const { createUserSchema, updateUserSchema, getUserSchema } = require('../schemas/user.schema');
 
 const router = express.Router();
@@ -29,7 +30,6 @@ validatorHandler(getUserSchema, 'params'),
 
 //create a user
 router.post('/',
-passport.authenticate('jwt', { session: false }),
 validatorHandler(createUserSchema, 'body'),
 async (req, res, next) => {
   try {

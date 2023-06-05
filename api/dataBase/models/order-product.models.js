@@ -26,7 +26,6 @@ const OrderProductSchema = {
     field: 'order_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,//pending for review
     references: {
       model: ORDER_TABLE,
       key: 'id',

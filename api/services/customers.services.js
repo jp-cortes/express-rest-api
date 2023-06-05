@@ -1,3 +1,4 @@
+require('dotenv').config({path: './.env'});// first read the  .env variables
 const boom = require('@hapi/boom');
 const { models } = require('../lib/sequelize');
 const { faker } = require('@faker-js/faker');
@@ -7,36 +8,34 @@ class CustomersService {
 // find all customers
 
 async generate() {
-  const limit = 2;
-  for (let index = 0; index < limit; index++) {
-    this.create({
+    return this.create({
       name: faker.person.firstName(),
       lastName: faker.person.lastName(),
       phone: faker.phone.number(),
       avatar: faker.internet.avatar(),
       user: {
-        email: `user${index}@mail.com`,
-        password: `user${index}`,
+        email: `${process.env.ADMIN_DATABASE_USER}`,
+        password: `${process.env.ADMIN_DATABASE_PASSWORD}`,
+        role: 'admin'
       }
     });
-  }
+
 }
 
 
   async find() {
     const response = await models.Customer.findAll({
-      include: ['user']
+      include: ['user'],
+      // exclude:['password']
     });
 
-    if(response.length === 0){
-      return await this.generate();
-    }
+    // delete response.dataValues.recoveryToken;
     return response;
   }
 //create customer
   async create(data) {
     const newCustomer = await models.Customer.create(data, {
-      include: ['user']
+      include: ['user'],
     });
     return newCustomer;
   }

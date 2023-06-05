@@ -3,10 +3,10 @@ const Joi = require('joi');
 //valiadation for products
 
 const id = Joi.number().integer();
-const name = Joi.string().min(5).max(20);
+const name = Joi.string().lowercase().min(5).max(20);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
-const description = Joi.string().min(10);
+const description = Joi.string().lowercase().min(10);
 const categoryId = Joi.number().integer();
 
 const limit = Joi.number().integer();

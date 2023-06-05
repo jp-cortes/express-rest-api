@@ -42,7 +42,7 @@ async (req, res, next) => {
  //create category
 router.post('/',
 passport.authenticate('jwt', { session: false }),
-checkRoles('admin', 'seller'),
+checkRoles('admin'),
 validatorHandler(createCategorySchema, 'body'),
  async (req, res, next) => {
      try {
@@ -58,7 +58,7 @@ validatorHandler(createCategorySchema, 'body'),
 //update a category
 router.patch('/:id',
 passport.authenticate('jwt', { session: false }),
-checkRoles('admin', 'seller'),
+checkRoles('admin'),
 validatorHandler(getCategorySchema, 'params'),
 validatorHandler(updateCategorySchema, 'body'),
 async (req, res, next) => {
@@ -79,7 +79,7 @@ next(error);// will show the error from the middleware folder
 //delete a category
 router.delete('/:id',
 passport.authenticate('jwt', { session: false }),
-checkRoles('admin', 'seller'),
+checkRoles('admin'),
 validatorHandler(getCategorySchema, 'params'),
 async (req, res, next) => {
  try {

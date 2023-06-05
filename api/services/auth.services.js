@@ -1,4 +1,3 @@
-require('dotenv').config({path: './.env'});// first read the  .env variables
 const { config } = require('../config/config');
 
 const nodemailer = require("nodemailer");
@@ -23,6 +22,7 @@ class AuthService {
     }
     //delete the password from the response
     delete user.dataValues.password;
+    delete user.dataValues.recoveryToken;
     return user;
 
   }
@@ -39,28 +39,55 @@ class AuthService {
     };
   }
 
-  async sendMail(email) {
+  async sendRecoveryMail(email) {
     const user = await service.findByEmail(email);
     if(!user) {
       throw boom.serverUnavailable();
      }
-     const transporter = nodemailer.createTransport({
-      host: process.env.NODE_MAILER_HOST,
-      port: 465,
-      secure: true, // true for 465, false for other ports
+     const payload = { sub: user.id };
+     const token = jwt.sign(payload, config.jwtRecovery, { expiresIn: '15min'});
+     const link = `${config.frontEndUrl}/recovery?token=${token}`;
+     await service.update(user.id, { recoveryToken: token });
+     // send mail with defined transport object
+     const mail = {
+      from: config.nodeMailer.user, // sender address
+      to: `${user.email}`, // list of receivers
+      subject: "Hello user recovery password (test)", // Subject line
+      text: "Hello user recovery password", // plain text body
+      html: `<b>Hello user check click this link => ${link} </b>`, // html body
+     };
+
+     const response = await this.sendMail(mail);
+     return response;
+
+  }
+
+  async changePassword(token, newPassword) {
+    try {
+      const payload = jwt.verify(token, config.jwtRecovery);
+    const user = await service.findById(payload.sub);
+    if(user.recoveryToken !== token) {
+      throw boom.unauthorized();
+    }
+    const hash = await bcrypt.hash(newPassword, 10);
+    await service.update(user.id, { recoveryToken: null, password: hash });
+    return { message: 'password updated', response: true };
+    } catch (error) {
+      throw boom.unauthorized();
+    }
+  }
+
+  async sendMail(infoMail) {
+    const transporter = nodemailer.createTransport({
+      host: config.nodeMailer.host,
+      port: config.nodeMailer.port,
+      secure: true,
       auth: {
-        user: process.env.NODE_MAILER_APP_USER, // generated ethereal user
-        pass: process.env.NODE_MAILER_APP_PASSWORD, // generated ethereal password
+        user: config.nodeMailer.user,
+        pass: config.nodeMailer.password,
       },
      });
-     // send mail with defined transport object
-     await transporter.sendMail({
-      from: 'admin@mail.com', // sender address
-      to: `${user.email}`, // list of receivers
-      subject: "Hello user (test)", // Subject line
-      text: "Hello user", // plain text body
-      html: "<b>Hello user</b>", // html body
-     });
+     await transporter.sendMail(infoMail);
 
   return { message: 'mail sent'};
   }

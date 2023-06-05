@@ -7,7 +7,7 @@ class OrdersService {
   async find() {
     const response = await models.Order.findAll();
     return response;
-    // return this.users;
+
   }
 //create order
   async create(data) {
@@ -26,6 +26,7 @@ class OrdersService {
       customerId: customer.id,
       status: data.status, paid: data.paid
     });
+
     return newOrder;
   }
 //find order by user id
@@ -77,7 +78,11 @@ class OrdersService {
 
 // relation N:M order-product
   async addItem(data) {
-    const newItem = await models.OrderProduct.create(data);
+    const newItem = await models.OrderProduct.create({
+      orderId: data.orderId,
+      productId: data.productId,
+      amount: data.amount
+    });
     return newItem;
   }
 }
