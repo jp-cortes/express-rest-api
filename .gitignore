@@ -200,6 +200,11 @@ db2
 # mySQL
 mysql_data
 
+# Example code
+example-jwt/
+example-nodemailer/
+example-passport/
+
 # vscode
 .vscode
 

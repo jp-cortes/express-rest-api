@@ -1,32 +1,16 @@
 
 const { models } = require('../lib/sequelize');
-const { faker } = require('@faker-js/faker');
+
 
 const boom = require("@hapi/boom");
 
 class CategoriesService{
   constructor() { }
 
-  async generate() {
-    const limit = 5;
-    for (let index = 0; index < limit; index++) {
-      this.create({
-        name: faker.commerce.department(),
-        image: faker.image.url(),
-      });
-    }
-  }
-
   // find all categories
 
   async find() {
     const response = await models.Category.findAll();
-
-     //if thera are no categories will generate by default
-     if(response.length === 0){
-      return await this.generate();
-    }
-
     return response;
   }
 // create category

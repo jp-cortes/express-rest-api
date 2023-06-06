@@ -9,6 +9,7 @@ const config = {
   dbUser: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,
   dbName: process.env.DB_NAME,
+  dbUrl: process.env.DATABASE_URL,
   jwtSecret: process.env.JWT_SECRET,
   jwtRecovery: process.env.JWT_SECRET_RECOVERY_MAIL,
   nodeMailer: {
