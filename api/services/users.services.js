@@ -19,6 +19,14 @@ class UsersService {
     return newUser;
   }
 //find  user by id
+  async findByEmail(email) {
+    const user = models.User.scope('withPassword').findOne({ where: { email }});
+    if(!user) {
+      throw boom.notFound('user not found');
+    }
+    return user;
+  }
+//find  user by id
   async findById(id) {
     const user = models.User.findByPk(id);
     if(!user) {

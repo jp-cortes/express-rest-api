@@ -7,12 +7,45 @@ class OrdersService {
   async find() {
     const response = await models.Order.findAll();
     return response;
-    // return this.users;
+
   }
 //create order
   async create(data) {
-    const newOrder = await models.Order.create(data);
+    const customer = await models.Customer.findOne({
+      where: {
+        '$user.id$': data.userId
+      },
+      include: ['user']
+    });
+
+    if(!customer) {
+      throw boom.notFound('customer not found');
+    }
+
+    const newOrder = await models.Order.create({
+      customerId: customer.id,
+      status: data.status, paid: data.paid
+    });
+
     return newOrder;
+  }
+//find order by user id
+  async findByUserId(userId) {
+    const order = models.Order.findAll({
+      where: {
+        '$customer.user.id$': userId
+      },
+      include: [
+        {
+          association: 'customer',
+          include: ['user']
+        }
+      ]
+    });
+    if(!order) {
+      throw boom.notFound('Order not found');
+    }
+    return order;
   }
 //find order by id
   async findById(id) {
@@ -45,7 +78,11 @@ class OrdersService {
 
 // relation N:M order-product
   async addItem(data) {
-    const newItem = await models.OrderProduct.create(data);
+    const newItem = await models.OrderProduct.create({
+      orderId: data.orderId,
+      productId: data.productId,
+      amount: data.amount
+    });
     return newItem;
   }
 }

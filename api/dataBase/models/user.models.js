@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 const USER_TABLE = 'users';
 
@@ -16,6 +17,11 @@ const UserSchema = {
   },
   password: {
     allowNull: false,
+    type: DataTypes.STRING,
+  },
+  recoveryToken: {
+    field: 'recovery_token',
+    allowNull: true,
     type: DataTypes.STRING,
   },
   role: {
@@ -44,7 +50,23 @@ class User extends Model {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false
+      timestamps: false,
+      hooks: { //encrypt password before create
+        beforeCreate: async (user) => {
+          const password = await bcrypt.hash(user.password,10);
+          user.password = password;
+        },
+      },
+      defaultScope: {//default scope show user info without password & recovery token
+        attributes:{
+          exclude: ['password']
+        },
+      },
+      scopes: {
+        withPassword: {
+          attributes: {}
+        }
+      },
     }
   }
 }

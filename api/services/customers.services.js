@@ -1,19 +1,24 @@
+require('dotenv').config({path: './.env'});// first read the  .env variables
 const boom = require('@hapi/boom');
 const { models } = require('../lib/sequelize');
 
 class CustomersService {
   constructor() { }
 // find all customers
+
   async find() {
     const response = await models.Customer.findAll({
-      include: ['user']
+      include: ['user'],
+      // exclude:['password']
     });
+
+    // delete response.dataValues.recoveryToken;
     return response;
   }
 //create customer
   async create(data) {
     const newCustomer = await models.Customer.create(data, {
-      include: ['user']
+      include: ['user'],
     });
     return newCustomer;
   }
