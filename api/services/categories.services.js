@@ -8,7 +8,7 @@ class CategoriesService{
   constructor() { }
 
   // find all categories
-
+  //must create  minimun 10 categories before creating products
   async find() {
     const response = await models.Category.findAll();
     return response;

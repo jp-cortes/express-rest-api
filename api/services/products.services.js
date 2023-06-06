@@ -6,7 +6,10 @@ const { faker } = require('@faker-js/faker');
 class ProductsService {
   constructor() {}
 
+
+  // can be use to generate  the first product of the database
   async generate() {
+    //before runnig you must create  minimun 10 categories otherwise the database will crash
     const limit = 100;
     for (let index = 0; index < limit; index++) {
       this.create({

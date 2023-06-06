@@ -1,11 +1,8 @@
-// require('dotenv').config({path: './.env'});
-
 const { config } = require('../config/config');
 
 const { Sequelize } = require('sequelize');
 const setupModels = require('../dataBase/models');
 
-// const URI = process.env.DATABASE_URL;
 
 
 const options = {

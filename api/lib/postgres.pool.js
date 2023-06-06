@@ -1,11 +1,8 @@
-// require('dotenv').config({path: './.env'});
-
 const { config } = require('./../config/config');
 //prevent creating a differen client  on every connection
 
 const { Pool } = require('pg');
 
-// const ProductionURI = process.env.DATABASE_URL;
 
 const options = {};
 

@@ -1,27 +1,10 @@
 require('dotenv').config({path: './.env'});// first read the  .env variables
 const boom = require('@hapi/boom');
 const { models } = require('../lib/sequelize');
-const { faker } = require('@faker-js/faker');
 
 class CustomersService {
   constructor() { }
 // find all customers
-
-async generate() {
-    return this.create({
-      name: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      phone: faker.phone.number(),
-      avatar: faker.internet.avatar(),
-      user: {
-        email: `${process.env.ADMIN_DATABASE_USER}`,
-        password: `${process.env.ADMIN_DATABASE_PASSWORD}`,
-        role: 'admin'
-      }
-    });
-
-}
-
 
   async find() {
     const response = await models.Customer.findAll({
