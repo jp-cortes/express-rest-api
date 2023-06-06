@@ -202,9 +202,9 @@ db2
 mysql_data
 
 # Example code
+examples
 example-jwt/
-example-nodemailer/
-example-passport/
+examples-passport/
 
 # vscode
 .vscode
