@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon api/index.js",
-    "start": "NODE_ENV=development netlify serve api",
+    "start": "NODE_ENV=development netlify serve api/index.js",
     "build": "NODE_ENV=production netlify build api/index.js",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli  db:migrate",
