@@ -204,7 +204,7 @@ mysql_data
 # Example code
 examples
 example-jwt/
-examples-passport/
+example-passport/
 
 # vscode
 .vscode

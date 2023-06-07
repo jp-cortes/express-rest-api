@@ -14,6 +14,7 @@ const {
 const router = express.Router();
 const orders = new OrdersService();
 
+//get orders
 router.get('/',
 passport.authenticate('jwt', { session: false }),
 checkRoles('admin'),
@@ -24,9 +25,10 @@ async (req, res, next) => {
     next(error);
   }
 });
-
+//get order by id
 router.get('/:id',
 passport.authenticate('jwt', { session: false }),
+checkRoles('admin', 'seller'),
   validatorHandler(getOrderSchema, 'params'),
    async (req, res, next) => {
     try {
@@ -37,8 +39,7 @@ passport.authenticate('jwt', { session: false }),
     } catch(error) {
       next(error);// will show the error from the middleware folder
     }
-  });
-
+  });//create order
 router.post('/',
 passport.authenticate('jwt', { session: false }),
 validatorHandler(createOrderSchema, 'body'),
@@ -51,9 +52,10 @@ validatorHandler(createOrderSchema, 'body'),
     }
   }
 );
-
+//patch order
 router.patch('/:id',
 passport.authenticate('jwt', { session: false }),
+checkRoles('admin'),
 validatorHandler(getOrderSchema, 'params'),
 validatorHandler(updateOrderSchema, 'body'),
   async (req, res, next) => {
@@ -66,7 +68,7 @@ validatorHandler(updateOrderSchema, 'body'),
     }
   }
 );
-
+//delere order
 router.delete('/:id',
 passport.authenticate('jwt', { session: false }),
 validatorHandler(getOrderSchema, 'params'),

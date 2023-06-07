@@ -13,6 +13,7 @@ const {
 const router = express.Router();
 const service = new CustomerService();
 
+// get all customers
 router.get('/',
 passport.authenticate('jwt', { session: false }),
 checkRoles('admin'),
@@ -24,7 +25,7 @@ async (req, res, next) => {
   }
 });
 
-
+//get customer by id
 router.get('/:id',
 validatorHandler(getCustomerSchema),
 passport.authenticate('jwt', { session: false }),
@@ -39,7 +40,7 @@ async (req, res, next) => {
   }
 });
 
-
+//create customer
 router.post('/',
   validatorHandler(createCustomerSchema, 'body'),
   // passport.authenticate('jwt', { session: false }),
@@ -53,6 +54,7 @@ router.post('/',
   }
 );
 
+// update customer
 router.patch('/:id',
 passport.authenticate('jwt', { session: false }),
   validatorHandler(getCustomerSchema, 'params'),
@@ -68,6 +70,7 @@ passport.authenticate('jwt', { session: false }),
   }
 );
 
+//delete customer
 router.delete('/:id',
 passport.authenticate('jwt', { session: false }),
 checkRoles('admin'),
