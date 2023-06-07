@@ -7,6 +7,7 @@ const AuthService = require('../services/auth.services');
 const router = express.Router();
 const service = new AuthService();
 
+//loging user
 router.post('/login',
 validatorHandler(loginAuthSchema),
  passport.authenticate('local', { session: false }),
@@ -18,7 +19,7 @@ validatorHandler(loginAuthSchema),
     next(error);
   }
 });
-
+//recovery password email
 router.post('/recovery',
 validatorHandler(recoveryAuthSchema),
  async (req, res, next) => {
@@ -30,6 +31,7 @@ validatorHandler(recoveryAuthSchema),
     next(error);
   }
 });
+//change password
 router.post('/change-password',
 validatorHandler(changePasswordSchema),
  async (req, res, next) => {

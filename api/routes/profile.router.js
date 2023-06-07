@@ -7,6 +7,7 @@ const OrdersService = require('../services/orders.services');
 const router = express.Router();
 const service = new OrdersService();
 
+//get order of a single user
 router.get('/my-orders',
 passport.authenticate('jwt', { session: false }),
 async (req, res, next) => {
