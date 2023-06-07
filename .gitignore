@@ -208,5 +208,9 @@ example-passport/
 
 # vscode
 .vscode
-
+# netlify
+functions
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
+
+# Local Netlify folder
+.netlify
