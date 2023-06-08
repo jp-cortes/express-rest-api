@@ -10,7 +10,7 @@ const profileRouter = require('./profile.router');
 
 function routerApi(app) {
   const router = express.Router();
-  app.use('/.netlify/functions/api/v1', router);//netlify
+  app.use('/api/v1', router);//netlify
   router.use('/products', productsRouter);
   router.use('/users', usersRouter);
   router.use('/categories', categoriesRouter);
