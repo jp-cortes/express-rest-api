@@ -2,8 +2,7 @@
 
 * This is the backend repository for an e-commerce website built using Express, Docker, Sequelize, Sequelize CLI, PostgreSQL, MySQL, Passport for authentication, and JWT for authorization.
 
-# Branches
-* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**.
+* Take into account this branch (development-mysql)is still under construction.
 
 # Features
 * Express: A fast and minimalistic web application framework for Node.js.
