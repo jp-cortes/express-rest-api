@@ -65,6 +65,7 @@ NODE_MAILER_APP_PASSWORD=""
 * For Schemas validation with joi check folder schemas/
 * For the logic of the routes check file services/
 * For user authentication and authorization check folder utils/
+* The docker set up is in the file docker-compose.yml
 
 # Branches
 The project is divided into three branches, each representing a different version of the backend:
