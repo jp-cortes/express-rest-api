@@ -193,7 +193,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+# integration examples
+examples/
 # Docker
 db
 # mySQL
