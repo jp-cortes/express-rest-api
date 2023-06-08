@@ -76,7 +76,7 @@ The project is divided into three branches, each representing a different versio
 * development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
 * express: A branch with a raw version fully functional. Running in Node.js
 
-* Contributing
+# Contributing
 We welcome contributions to help improve this project. To contribute, please follow these steps:
 
 * Fork the repository.
