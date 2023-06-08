@@ -200,6 +200,8 @@ db2
 # mySQL
 mysql_data
 
+#examples of integrations
+examples/
 # vscode
 .vscode
 
