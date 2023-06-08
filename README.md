@@ -2,7 +2,7 @@
 
 * This is the backend repository for an e-commerce website built using Express, Docker, Sequelize, Sequelize CLI, PostgreSQL, MySQL, Passport for authentication, and JWT for authorization.
 
-* Please note that this project is still under construction, and there are three versions of the backend separated in different branches.
+* This branch (production) the DataBase is build with postgreSQL version
 
 # Features
 * Express: A fast and minimalistic web application framework for Node.js.
@@ -10,62 +10,81 @@
 * Sequelize: A powerful and flexible Object-Relational Mapping (ORM) tool for Node.js.
 * Sequelize CLI: A Command Line Interface (CLI) for managing database migrations and generating models with Sequelize.
 * PostgreSQL: A robust open-source relational database management system.
-* MySQL: A popular open-source relational database management system.
 * Passport: An authentication middleware for Node.js that supports various authentication strategies.
 * JWT: JSON Web Token for authorization, providing a secure way to transmit information between parties.
 
 
-<!--Installation
-Clone the repository:
+# Installation
+1. Clone the repository:
 
-shell
-Copy code
-git clone https://github.com/your-username/e-commerce-backend.git
-Change into the project directory:
+```git clone git@github.com:jp-cortes/express-rest-api.git```
 
-shell
-Copy code
-cd e-commerce-backend
-Install the dependencies:
+2. Change into the project directory:
 
-shell
-Copy code
-npm install
-Create a .env file in the root directory and configure the following environment variables:
+```cd express-rest-api```
 
-plaintext
-Copy code
-DB_HOST=localhost
-DB_PORT=5432   # or your PostgreSQL port
-DB_NAME=database_name
-DB_USER=database_user
-DB_PASSWORD=database_password
-JWT_SECRET=your_jwt_secret
-Run the database migrations:
+3. Install the dependencies:
 
-shell
-Copy code
-npx sequelize-cli db:migrate
-Start the server:
+```npm install```
+4. Create a .env file in the root directory and configure the following environment variables:
+* Check .env.example fila as reference
+```
+# express
+PORT="5432"   # or your PostgreSQL port
+SERVER=""
+DATABASE_URL=""
+JWT_SECRET=""
+# Docker
+DB_HOST="localhost"
+DB_NAME=""
+DB_USER=""
+DB_PASSWORD=""
+DB_PORT=""
 
-shell
-Copy code
-npm start
-Branches
+#PGADMIN
+PGADMIN_USER=""
+PGADMIN_PASSWORD=""
+
+#nodemailer
+NODE_MAILER_PORT=""
+NODE_MAILER_HOST=""
+NODE_MAILER_APP_USER=""
+NODE_MAILER_APP_PASSWORD=""
+```
+5. Run docker:
+```docker compose up -d```
+6. Run the database migrations:
+
+```npm run migrations:run```
+7. Start the server:
+```npm run dev```
+
+8. Aditional information
+* All endpoints in folder routes/index.js
+* You may first create at least 10 categories in order to start creating products.
+* Check the set up of the evironment variables in folder config/
+* For migrations check the file dataBase/
+* For Schemas validation with joi check folder schemas/
+* For the logic of the routes check file services/
+* For user authentication and authorization check folder utils/
+
+# Branches
 The project is divided into three branches, each representing a different version of the backend:
 
-master: The stable version of the backend, suitable for production use.
-development: The branch for ongoing development, containing the latest features and bug fixes.
-feature-branch: A branch dedicated to specific features or experiments, which may not be complete or fully functional.
-Contributing
+* main: The stable version of the backend, suitable for production use.
+* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**, containing the latest features and bug fixes.
+* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
+* express: A branch with a raw version fully functional. Running in Node.js
+
+* Contributing
 We welcome contributions to help improve this project. To contribute, please follow these steps:
 
-Fork the repository.
-Create a new branch based on the branch you want to contribute to.
-Make your changes and commit them.
-Push your changes to your forked repository.
-Open a pull request, clearly describing the changes you made.
-Please note that all contributions are subject to review and acceptance by the project maintainers.
+* Fork the repository.
+* Create a new branch based on the branch you want to contribute to.
+* Make your changes and commit them.
+* Push your changes to your forked repository.
+* Open a pull request, clearly describing the changes you made.
+* Please note that all contributions are subject to review and acceptance by the project maintainers.
 
-License
-This project is licensed under the MIT License.-->
+# License
+This project is licensed under the MIT License.
