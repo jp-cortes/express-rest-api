@@ -16,6 +16,7 @@ const service = new CustomerService();
 // get all customers
 router.get('/',
 passport.authenticate('jwt', { session: false }),
+checkRoles('admin'),
 async (req, res, next) => {
   try {
     res.json(await service.find());
@@ -28,7 +29,6 @@ async (req, res, next) => {
 router.get('/:id',
 validatorHandler(getCustomerSchema),
 passport.authenticate('jwt', { session: false }),
-checkRoles('admin'),
 async (req, res, next) => {
   try {
     const { id } = req.params;
