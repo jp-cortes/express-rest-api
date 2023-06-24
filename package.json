@@ -7,8 +7,8 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "./node_modules/.bin/netlify-lambda serve api",
-    "build": "./node_modules/.bin/netlify-lambda build api",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli  db:migrate",
     "migrations:revert": "sequelize-cli  db:migrate:undo",
