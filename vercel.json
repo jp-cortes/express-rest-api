@@ -1,8 +1,10 @@
 {
-  "rewrites": [
-    {
-      "source": "/api/*",
-      "destination": "/api/*"
-    }
+  "version": 2,
+  "name": "express-rest-api",
+  "builds": [
+    { "api": "index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "api": "/(.*)", "dest": "/index.js" }
   ]
 }
