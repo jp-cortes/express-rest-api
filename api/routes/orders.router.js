@@ -25,6 +25,7 @@ async (req, res, next) => {
     next(error);
   }
 });
+
 //get order by id
 router.get('/:id',
 passport.authenticate('jwt', { session: false }),
@@ -39,7 +40,9 @@ checkRoles('admin', 'seller'),
     } catch(error) {
       next(error);// will show the error from the middleware folder
     }
-  });//create order
+  });
+
+  //create order
 router.post('/',
 passport.authenticate('jwt', { session: false }),
 validatorHandler(createOrderSchema, 'body'),
@@ -52,6 +55,7 @@ validatorHandler(createOrderSchema, 'body'),
     }
   }
 );
+
 //patch order
 router.patch('/:id',
 passport.authenticate('jwt', { session: false }),
