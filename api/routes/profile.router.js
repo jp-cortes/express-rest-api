@@ -8,12 +8,13 @@ const router = express.Router();
 const service = new OrdersService();
 
 //get order of a single user
-router.get('/my-orders',
+// profile/my-orders/:id
+router.get('/my-orders/:id',
 passport.authenticate('jwt', { session: false }),
 async (req, res, next) => {
   try {
-    const user = req.user;
-    const orders = await service.findByUserId(user.sub);
+    const { id } = req.params;
+    const orders = await service.findByUserId(id);
     res.json(orders);
   } catch (error) {
     next(error);
