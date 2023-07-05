@@ -1,7 +1,7 @@
 services:
   postgres:
    container_name: postgres
-   image: postgres
+   image: postgres:15
    restart: always
    environment:
      POSTGRES_DB: ${DB_NAME}
@@ -14,7 +14,7 @@ services:
 
   pgadmin:
    container_name: pg_container
-   image: dpage/pgadmin4
+   image: dpage/pgadmin4:7.4
    restart: always
    environment:
      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}

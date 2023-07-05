@@ -7,17 +7,17 @@ class ProductsService {
   constructor() {}
 
 
-  // can be use to generate  the first product of the database
+  // can be use to generate  the first products in the database
   async generate() {
-    //before runnig you must create  minimun 10 categories otherwise the database will crash
-    const limit = 100;
+    //before runnig you must create categories otherwise the database will crash
+    const limit = 9;
     for (let index = 0; index < limit; index++) {
       this.create({
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
-        image: faker.image.url(),
+        image: faker.image.urlLoremFlickr({category: 'beauty'}),// use the category so the image will be related
         description: faker.commerce.productDescription(),
-        categoryId:faker.number.int({ min:1, max: 10 })
+        categoryId: 9 // was made by every category from 1 to 9
       });
     }
   }
@@ -48,8 +48,8 @@ class ProductsService {
       };
     }
 
-    const response = await models.Product.findAll(options);
 
+    const response = await models.Product.findAll(options);
     return response;
   }
 //create product
