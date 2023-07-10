@@ -33,7 +33,7 @@ async (req, res, next) => {
   try {
     const { id } = req.params;
     const productByCategory = await category.findById(id);
-    res.status(404).json(productByCategory);
+    res.status(200).json(productByCategory);
   } catch (error) {
     next(error);
   }
