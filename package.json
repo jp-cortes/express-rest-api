@@ -27,7 +27,6 @@
     "prettier": "^2.8.8"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.0.0",
     "@hapi/boom": "^10.0.1",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
