@@ -18,7 +18,7 @@ const createOrderSchema = Joi.object({
 
 const updateOrderSchema = Joi.object({
   id: id,
-  paid: paid.required(),
+  paid: paid,
   status: status.required()
 });
 

@@ -52,6 +52,8 @@ module.exports = {
       }
     }
     );
+
+
     //N:N Entity Relationships
     await queryInterface.createTable(ORDER_PRODUCT_TABLE, {
       id: {
