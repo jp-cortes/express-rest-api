@@ -2,7 +2,6 @@ const Joi = require('joi');
 
 const id = Joi.number().integer();
 const paid = Joi.boolean();
-const paymentMethod = Joi.string();
 const status = Joi.string();
 
 //relation  N:N order-product
@@ -13,7 +12,6 @@ const amount = Joi.number().integer().min(1);
 const createOrderSchema = Joi.object({
   paid: paid.required(),
   status: status.required(),
-  paymentMethod: paymentMethod.required()
 });
 
 const updateOrderSchema = Joi.object({

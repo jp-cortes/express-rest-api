@@ -15,11 +15,6 @@ const OrderSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  paymentMethod: {
-    field: 'payment_method',
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
   paid: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
