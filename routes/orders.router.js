@@ -29,7 +29,6 @@ async (req, res, next) => {
 //get order by id
 router.get('/:id',
 passport.authenticate('jwt', { session: false }),
-checkRoles('admin', 'seller'),
   validatorHandler(getOrderSchema, 'params'),
    async (req, res, next) => {
     try {
