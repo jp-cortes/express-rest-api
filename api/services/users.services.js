@@ -28,7 +28,9 @@ class UsersService {
   }
 //find  user by id
   async findById(id) {
-    const user = models.User.findByPk(id);
+    const user = models.User.findByPk(id,{
+      include: ['customer']
+    });
     if(!user) {
       throw boom.notFound('user not found');
     }

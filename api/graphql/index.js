@@ -1,33 +1,12 @@
 const { ApolloServer } = require('@apollo/server');
 // Playground in @apollo/server
 const { ApolloServerPluginLandingPageLocalDefault } = require('@apollo/server/plugin/landingPage/default')
-
 const { expressMiddleware } = require('@apollo/server/express4');
+const { loadFiles } = require('@graphql-tools/load-files');
 
-const typeDefs =  `
-type Query {
-  hi: String
-  getPerson(name: String, age: Int): String
-  getInt(age: Int): Int
-  getFloat(price: Float): Float
-  getString: String
-  getBoolean: Boolean
-  getId: ID
-  getNumbers(numbers: [Int!]!): [Int]
-}
-`;
-//  the "!" exclamation point make the type mandatory & not null
-// Get - Query
-// POST, PUT, DELET = Mutations
-// POST = 201
-// POST = CREATE = 201
-// GET = GET DATA
-// PUT = Update
-// DELETE = remove
 
-// List
-// [String]
-// [Int]
+
+
 
 
  const resolvers = {
@@ -39,12 +18,22 @@ type Query {
     getString: () => 'word',
     getBoolean: () => true,
     getId: () => '2324654',
+    getProduct: () => {
+      return {
+        id:'321654',
+        name: 'product 1',
+        price: 102.90,
+        description: 'bla bla bla',
+        image: 'http://image.cloudinay.com',
+        createdAt: new Date().toISOString()
+      }
+    }
   }
  }
 
  const useGraphQL = async (app) => {
   const server = new ApolloServer({
-    typeDefs,
+    typeDefs:  await loadFiles('./api/**/*.graphql'),
     resolvers,
     playground: true,
     plugins: [
