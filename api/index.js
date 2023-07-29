@@ -1,40 +1,46 @@
-
 require('dotenv').config({path: './.env'});// first read the  .env variables
+
 const cors = require('cors');// validate routes
 const express = require('express');
 const routerApi = require('./routes');
+
 const { logErrors, errorHandler, boomErrorHandler, ormErrorhandler } = require('./middlewares/error.handler');
 
 
 
+
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
 // example for specific url
 const whitelist = [`${process.env.SERVER}`, 'http://localhost:3000'];
 
-const options = {
-  origin: (origin, callback) => {
-    if(whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed'));
-    }
-  }
+const corsOptionsDelegate = (req, callback) => {
+  let corsOptions;
+if (whitelist.indexOf(req.header('Origin')) !== -1) {
+  corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+} else {
+  corsOptions = { origin: false } // disable CORS for this request
+}
+callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
-// app.use(cors(options)); //access fot the specific url
-app.use(cors()); //access for all urls
+app.use(cors(corsOptionsDelegate)); //access for the specific url
 
+// app.use(cors()); //access for all urls
 
+//user authentication & authorization
+require('./utils/auth');
 
-app.get('api/', (req, res) => {
-  res.send('Ecommerce REST API');
+app.get('/', (req, res) => {
+  res.send('Welcome Ecommerce REST API');
 });
 
+
 routerApi(app);
+
 
 app.use(logErrors);
 app.use(ormErrorhandler);

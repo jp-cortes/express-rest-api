@@ -2,6 +2,7 @@
 
 * This is the backend repository for an e-commerce website built using Express, Docker, Sequelize, Sequelize CLI, PostgreSQL, MySQL, Passport for authentication, and JWT for authorization.
 
+
 # Branch
 * development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**.
 
@@ -69,7 +70,17 @@ NODE_MAILER_APP_PASSWORD=""
 * For the logic of the routes check file services/
 * For user authentication and authorization check folder utils/
 
+<<<<<<< HEAD
 
+=======
+# Branches
+The project is divided into three branches, each representing a different version of the backend:
+
+* main: The stable version of the backend, suitable for production use.
+* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**, containing the latest features and bug fixes.
+* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
+* express: A branch with a raw version fully functional. Running in Node.js
+>>>>>>> production
 
 # Contributing
 We welcome contributions to help improve this project. To contribute, please follow these steps:

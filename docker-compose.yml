@@ -1,7 +1,7 @@
 services:
   postgres:
    container_name: postgres
-   image: postgres
+   image: postgres:15
    restart: always
    environment:
      POSTGRES_DB: ${DB_NAME}
@@ -10,14 +10,34 @@ services:
    ports:
       - 5432:5432
    volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./db_production:/var/lib/postgresql/data
 
   pgadmin:
    container_name: pg_container
-   image: dpage/pgadmin4
+   image: dpage/pgadmin4:7.4
    restart: always
    environment:
      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
    ports:
       - 5050:80
+  mysql:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_SQL_NAME}
+      MYSQL_USER:
+      MYSQL_ROOT_PASSWORD: ${DB_SQL_PASSWORD}
+      MYSQL_PORT: 3306
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 8080:80

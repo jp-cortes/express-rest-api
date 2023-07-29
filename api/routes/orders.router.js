@@ -1,7 +1,9 @@
 const express = require('express');
+const passport =  require('passport');//authenticate jwt
 
-const OrdersService = require('../sevices/orders.services');
+const OrdersService = require('../services/orders.services');
 const validatorHandler = require('../middlewares/validator.handler');
+const { checkRoles } = require('../middlewares/auth.handler');
 const {
   createOrderSchema,
   getOrderSchema,
@@ -12,7 +14,11 @@ const {
 const router = express.Router();
 const orders = new OrdersService();
 
-router.get('/',  async (req, res, next) => {
+//get orders
+router.get('/',
+passport.authenticate('jwt', { session: false }),
+checkRoles('admin'),
+async (req, res, next) => {
   try {
     res.json(await orders.find());
   } catch (error) {
@@ -20,7 +26,9 @@ router.get('/',  async (req, res, next) => {
   }
 });
 
+//get order by id
 router.get('/:id',
+passport.authenticate('jwt', { session: false }),
   validatorHandler(getOrderSchema, 'params'),
    async (req, res, next) => {
     try {
@@ -33,11 +41,13 @@ router.get('/:id',
     }
   });
 
+  //create order
 router.post('/',
+passport.authenticate('jwt', { session: false }),
 validatorHandler(createOrderSchema, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
+      const body = { userId:req.user.sub, ...req.body };
       res.status(201).json(await orders.create(body));
     } catch (error) {
       next(error);
@@ -45,7 +55,10 @@ validatorHandler(createOrderSchema, 'body'),
   }
 );
 
+//patch order
 router.patch('/:id',
+passport.authenticate('jwt', { session: false }),
+checkRoles('admin'),
 validatorHandler(getOrderSchema, 'params'),
 validatorHandler(updateOrderSchema, 'body'),
   async (req, res, next) => {
@@ -58,8 +71,9 @@ validatorHandler(updateOrderSchema, 'body'),
     }
   }
 );
-
+//delere order
 router.delete('/:id',
+passport.authenticate('jwt', { session: false }),
 validatorHandler(getOrderSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -73,6 +87,7 @@ validatorHandler(getOrderSchema, 'params'),
 
 //relation  N:N order-product
 router.post('/add-item',
+passport.authenticate('jwt', { session: false }),
 validatorHandler(addItemSchema, 'body'),
   async (req, res, next) => {
     try {

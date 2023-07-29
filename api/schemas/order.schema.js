@@ -5,19 +5,18 @@ const paid = Joi.boolean();
 const status = Joi.string();
 
 //relation  N:N order-product
-const orderId = Joi.number().integer()
-const productId = Joi.number().integer()
-const amount = Joi.number().integer().min(1)
+const orderId = Joi.number().integer();
+const productId = Joi.number().integer();
+const amount = Joi.number().integer().min(1);
 
 const createOrderSchema = Joi.object({
-  customerId: id.required(),
   paid: paid.required(),
-  status: status.required()
+  status: status.required(),
 });
 
 const updateOrderSchema = Joi.object({
   id: id,
-  paid: paid.required(),
+  paid: paid,
   status: status.required()
 });
 

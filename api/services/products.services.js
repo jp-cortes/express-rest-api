@@ -1,9 +1,26 @@
 const boom = require('@hapi/boom');
 const { models } = require('../lib/sequelize');
 const { Op } = require('sequelize');
+// const { faker } = require('@faker-js/faker');
 
 class ProductsService {
   constructor() {}
+
+
+  // can be use to generate  the first products in the database
+  async generate() {
+    //before runnig you must create categories otherwise the database will crash
+    const limit = 9;
+    for (let index = 0; index < limit; index++) {
+      this.create({
+        name: faker.commerce.productName(),
+        price: parseInt(faker.commerce.price(), 10),
+        image: faker.image.urlLoremFlickr({category: 'beauty'}),// use the category so the image will be related
+        description: faker.commerce.productDescription(),
+        categoryId: 9 // was made by every category from 1 to 9
+      });
+    }
+  }
 
   //find  all products
   async find(query) {
@@ -30,6 +47,7 @@ class ProductsService {
         [Op.lte]: max_price,
       };
     }
+
 
     const response = await models.Product.findAll(options);
     return response;

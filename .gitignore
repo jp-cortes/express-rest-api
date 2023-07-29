@@ -135,7 +135,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
 
 # Gatsby files
 .cache/
@@ -196,13 +196,22 @@ $RECYCLE.BIN/
 
 # Docker
 db
+db_graphql
+db_production
 db2
 # mySQL
 mysql_data
 
-#examples of integrations
-examples/
+# Example code
+examples
+example-jwt/
+example-passport/
+
 # vscode
 .vscode
-
+# netlify
+functions
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
+
+# Local Netlify folder
+.netlify

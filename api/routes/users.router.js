@@ -1,6 +1,9 @@
 const express = require('express');
-const UsersService = require('../sevices/users.services');
+const passport = require('passport');//authenticate jwt
+
+const UsersService = require('../services/users.services');
 const validatorHandler = require('../middlewares/validator.handler');
+const { checkRoles } = require('../middlewares/auth.handler');
 const { createUserSchema, updateUserSchema, getUserSchema } = require('../schemas/user.schema');
 
 const router = express.Router();
@@ -41,6 +44,8 @@ async (req, res, next) => {
 
 //update an user
 router.patch('/:id',
+passport.authenticate('jwt', { session: false }),
+checkRoles('admin'),
 validatorHandler(getUserSchema, 'params'),
 validatorHandler(updateUserSchema, 'body'),
 async (req, res, next) => {
@@ -57,6 +62,7 @@ async (req, res, next) => {
 
 //delete an user
 router.delete('/:id',
+passport.authenticate('jwt', { session: false }),
 validatorHandler(getUserSchema, 'params'),
 async (req, res, next) => {
   try {

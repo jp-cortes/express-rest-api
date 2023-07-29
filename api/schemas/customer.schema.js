@@ -3,10 +3,11 @@ const { createUserSchema, updateUserSchema } = require('./user.schema')
 //validation for customers
 
 const id = Joi.number().integer();
-const name = Joi.string().min(3).max(20);
-const lastname = Joi.string().min(3).max(20);
-const phone = Joi.number().integer();
+const name = Joi.string().lowercase().min(3).max(20);
+const lastname = Joi.string().lowercase().min(3).max(20);
+const phone = Joi.string();
 const userId = Joi.number().integer();
+const avatar = Joi.string().uri();
 // const image = Joi.string();
 // const country = Joi.string().min(3);
 // const city = Joi.string().min(4).max(20);
@@ -19,6 +20,7 @@ const createCustomerSchema = Joi.object({
   name: name.required(),
   lastName: lastname.required(),
   phone: phone.required(),
+  avatar: avatar,
   user: createUserSchema
 
   // image: image.required(),
@@ -33,6 +35,7 @@ const updateCustomerSchema = Joi.object({
   name: name,
   lastName: lastname,
   phone: phone,
+  avatar: avatar,
   user: updateUserSchema,
   userId: userId,
   // image: image,

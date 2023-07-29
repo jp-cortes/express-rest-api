@@ -3,6 +3,8 @@ const { config } = require('../config/config');
 const { Sequelize } = require('sequelize');
 const setupModels = require('../dataBase/models');
 
+
+
 const options = {
   dialect: 'postgres',
   logging: config.isProd ? false : true,

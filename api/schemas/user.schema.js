@@ -3,19 +3,19 @@ const Joi = require('joi');
 //validation for users
 
 const id = Joi.number().integer();
-const email = Joi.string()
-const password = Joi.string()
-const role = Joi.string().min(5)
+const email = Joi.string().lowercase();
+const password = Joi.string();
+const role = Joi.string().lowercase();
 
 const createUserSchema = Joi.object({
   email: email.required(),
   password: password.required(),
-  role: role
+  role: role.valid('customer')
 });
 
 const updateUserSchema = Joi.object({
   email: email,
-  role: role
+  role: role.valid('admin', 'customer', 'seller')
 
 });
 
