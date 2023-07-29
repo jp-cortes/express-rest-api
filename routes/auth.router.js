@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const { loginAuthSchema, recoveryAuthSchema, changePasswordSchema } = require('../schemas/auth.schema');
 const validatorHandler = require('../middlewares/validator.handler');
-const AuthService = require('../services/auth.services');
+const AuthService = require('../../services/auth.services');
 
 const router = express.Router();
 const service = new AuthService();

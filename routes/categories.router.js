@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');//authenticate jwt
 
-const CategoriesService = require('../services/categories.services');
+const CategoriesService = require('../../services/categories.services');
 
 const router = express.Router();
 const category = new CategoriesService();
