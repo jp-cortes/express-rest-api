@@ -7,7 +7,18 @@ type Query {
   getBoolean: Boolean
   getId: ID
   getNumbers(numbers: [Int!]!): [Int]
-  getProduct: Product
+  #products
+  product(id: ID): Product
+  products: [Product!]!
+  #categories
+  categories: [Category]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  image: String!
+  createdAt: String!
 }
 
 type Product {
@@ -21,11 +32,22 @@ type Product {
  # "the '!' exclamation point make the type mandatory & not null"
  # "Get - Query"
  # "POST, PUT, DELET = Mutations"
- # "POST = 201"
- # "POST = CREATE = 201"
- # "GET = GET DATA"
- # "PUT = Update"
- # "DELETE = remove"
- # "List"
  # "[String]"
  # "[Int]"
+type Mutation {
+  addProduct(dto:CreateProductDto!): Product!
+  addCategory(dto:CreateCategoryDto!): Category!
+}
+
+input CreateProductDto {
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  categoryId: ID!
+}
+
+input CreateCategoryDto {
+  name: String!
+  image: String!
+}
