@@ -52,9 +52,9 @@ class AuthService {
      const mail = {
       from: config.nodeMailer.user, // sender address
       to: `${user.email}`, // list of receivers
-      subject: "Hello user recovery password (test)", // Subject line
-      text: "Hello user recovery password", // plain text body
-      html: `<b>Hello user check click this link => ${link} </b>`, // html body
+      subject: "Reset your E-store password (test)", // Subject line
+      text: "Reset your E-store password (test)", // plain text body
+      html: `<a href='${link}'>CLick here to recover your password</a>`, // html body
      };
 
      const response = await this.sendMail(mail);
