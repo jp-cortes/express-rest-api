@@ -11,4 +11,14 @@ const  addCategory = async(_, { dto }) => {
   return newCategory;
 }
 
-module.exports = { getCategories, addCategory }
+const  updateCategory = async(_, { id, dto }) => {
+  const category = await service.update(id, dto);
+  return category;
+}
+
+const  deleteCategory = async(_, { id }) => {
+    await service.delete(id);
+  return id;
+}
+
+module.exports = { getCategories, addCategory, updateCategory, deleteCategory }

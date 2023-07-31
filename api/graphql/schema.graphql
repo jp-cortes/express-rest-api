@@ -28,6 +28,8 @@ type Product {
   description: String!
   image: String!
   createdAt: String!
+  categoryId: ID!
+  category: Category!
 }
  # "the '!' exclamation point make the type mandatory & not null"
  # "Get - Query"
@@ -35,8 +37,14 @@ type Product {
  # "[String]"
  # "[Int]"
 type Mutation {
+  # product
   addProduct(dto:CreateProductDto!): Product!
+  updateProduct(id: ID!, dto: UpdateProductDto!): Product
+  deleteProduct(id: ID!): ID
+  # category
   addCategory(dto:CreateCategoryDto!): Category!
+  updateCategory(id: ID!, dto: UpdateCategoryDto!): Category
+  deleteCategory(id: ID!): ID
 }
 
 input CreateProductDto {
@@ -47,7 +55,20 @@ input CreateProductDto {
   categoryId: ID!
 }
 
+input UpdateProductDto {
+  name: String
+  price: Float
+  description: String
+  image: String
+  categoryId: ID
+}
+
 input CreateCategoryDto {
   name: String!
   image: String!
+}
+
+input UpdateCategoryDto {
+  name: String
+  image: String
 }
