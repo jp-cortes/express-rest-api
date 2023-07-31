@@ -14,18 +14,16 @@
 
 # Installation
 1. Clone the repository:
-
 ```git clone git@github.com:jp-cortes/express-rest-api.git```
 
 2. Change into the project directory:
-
 ```cd express-rest-api```
 
 3. Install the dependencies:
-
 ```npm install```
+
 4. Create a .env file in the root directory and configure the following environment variables:
-* Check .env.example fila as reference
+* Check .env.example file as reference
 ```
 # express
 PORT="5432"   # or your PostgreSQL port
@@ -51,13 +49,14 @@ NODE_MAILER_APP_PASSWORD=""
 ```
 5. Run docker:
 ```docker compose up -d```
-6. Run the database migrations:
 
+7. Run the database migrations:
 ```npm run migrations:run```
-7. Start the server:
+
+8. Start the server:
 ```npm run dev```
 
-8. Aditional information
+9. Aditional information
 * All endpoints in folder routes/index.js
 * You may first create at least 10 categories in order to start creating products.
 * Check the set up of the evironment variables in folder config/
