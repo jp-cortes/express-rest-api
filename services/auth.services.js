@@ -52,9 +52,18 @@ class AuthService {
      const mail = {
       from: config.nodeMailer.user, // sender address
       to: `${user.email}`, // list of receivers
-      subject: "Hello user recovery password (test)", // Subject line
-      text: "Hello user recovery password", // plain text body
-      html: `<b>Hello user check click this link => ${link} </b>`, // html body
+      subject: "Reset your E-store password", // Subject line
+      text: "Reset your E-store password", // plain text body
+      html: `
+            <h1>Reset your E-store password</h1>
+            <p>Reset your password for the email <b>${user.email}</b></p>
+            <a href='${link}'>CLick here to reset your password</a>
+            <p>Or copy and paste  the link below in the browser</p>
+            <a href='${link}'>${link}</a>
+            <br/>
+            <br/>
+            <b>If your did not request this ignore this email</b>
+            ` // html body
      };
 
      const response = await this.sendMail(mail);
