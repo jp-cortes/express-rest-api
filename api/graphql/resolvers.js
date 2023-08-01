@@ -1,5 +1,7 @@
-const { getProduct, getProducts, addProduct, updateProduct, deleteProduct } = require("./product.resolvers")
-const { getCategories, addCategory, updateCategory, deleteCategory } = require('./category.resolvers')
+const { getProduct, getProducts, addProduct, updateProduct, deleteProduct } = require("./product.resolvers");
+const { getCategories, addCategory, updateCategory, deleteCategory } = require('./category.resolvers');
+const { addCustomer, updateCustomer, deleteCustomer } = require('./customer.resolvers');
+const { login } = require('./auth.resolvers');
 
 const resolvers = {
   Query: {
@@ -20,7 +22,11 @@ const resolvers = {
     deleteProduct,
     addCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    login,
+    addCustomer,
+    updateCustomer,
+    deleteCustomer,
   }
  }
 

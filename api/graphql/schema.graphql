@@ -31,11 +31,28 @@ type Product {
   categoryId: ID!
   category: Category!
 }
- # "the '!' exclamation point make the type mandatory & not null"
- # "Get - Query"
- # "POST, PUT, DELET = Mutations"
- # "[String]"
- # "[Int]"
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  role: String!
+  createdAt: String!
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  lastName: String!
+  phone: String!
+  avatar: String!
+  user: User!
+}
+
 type Mutation {
   # product
   addProduct(dto:CreateProductDto!): Product!
@@ -45,8 +62,14 @@ type Mutation {
   addCategory(dto:CreateCategoryDto!): Category!
   updateCategory(id: ID!, dto: UpdateCategoryDto!): Category
   deleteCategory(id: ID!): ID
+  # user
+  login(email: String!, password: String!): AuthResponse
+  # customer
+  addCustomer(dto:CreateCustomerDto!): Customer!
+  updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
+  deleteCustomer(id: ID!): ID
 }
-
+# product
 input CreateProductDto {
   name: String!
   price: Float!
@@ -63,6 +86,7 @@ input UpdateProductDto {
   categoryId: ID
 }
 
+# category
 input CreateCategoryDto {
   name: String!
   image: String!
@@ -72,3 +96,21 @@ input UpdateCategoryDto {
   name: String
   image: String
 }
+
+# customer
+input CreateCustomerDto {
+  name: String!
+  lastName: String!
+  phone: String!
+  avatar: String
+  user: User!
+}
+
+input UpdateCustomerDto {
+  name: String
+  lastName: String
+  phone: String
+  avatar: String
+  user: User
+}
+

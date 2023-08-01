@@ -7,8 +7,15 @@ module.exports = {
     }
     return queryInterface.bulkInsert(CUSTOMER_TABLE, [
       {
-        name: 'Jane',
-        last_name: 'Doe',
+        name: 'demo',
+        last_name: 'admin',
+        phone: '123454698',
+        user_id: 1,
+        created_at: new Date()
+      },
+      {
+        name: 'jane',
+        last_name: 'doe',
         phone: '7830601',
         user_id: 2,
         created_at: new Date()
