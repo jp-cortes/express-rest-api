@@ -58,7 +58,7 @@ NODE_MAILER_APP_PASSWORD=""
 
 9. Aditional information
 * All endpoints in folder routes/index.js
-* You may first create at least 10 categories in order to start creating products.
+* You may first create at least 1 category in order to start creating products.
 * Check the set up of the evironment variables in folder config/
 * For migrations check the file dataBase/
 * For Schemas validation with joi check folder schemas/
