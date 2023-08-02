@@ -70,7 +70,7 @@ NODE_MAILER_APP_PASSWORD=""
 The project is divided into three branches, each representing a different version of the backend:
 
 * main: The stable version of the backend, suitable for production use.
-* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**, containing the latest features and bug fixes.
+* development-postgres: The branch for ongoing development with **postgreSQL and pgdadmin**, containing the latest features and bug fixes.
 * development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
 * express: A branch with a raw version fully functional. Running in Node.js
 
