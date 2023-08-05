@@ -4,7 +4,7 @@
 
 
 # Branch
-* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**.
+* development-postgres: The branch for ongoing development with **postgreSQL ang pgadmin**.
 
 # Features
 * Express: A fast and minimalistic web application framework for Node.js.
@@ -70,17 +70,6 @@ NODE_MAILER_APP_PASSWORD=""
 * For the logic of the routes check file services/
 * For user authentication and authorization check folder utils/
 
-<<<<<<< HEAD
-
-=======
-# Branches
-The project is divided into three branches, each representing a different version of the backend:
-
-* main: The stable version of the backend, suitable for production use.
-* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**, containing the latest features and bug fixes.
-* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
-* express: A branch with a raw version fully functional. Running in Node.js
->>>>>>> production
 
 # Contributing
 We welcome contributions to help improve this project. To contribute, please follow these steps:
