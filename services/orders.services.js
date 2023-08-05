@@ -5,7 +5,14 @@ class OrdersService {
   constructor() { }
 // find  all orders
   async find() {
-    const response = await models.Order.findAll();
+    const response = await models.Order.findAll({
+      include: [
+        {
+          association: 'customer'
+        },
+         'items'
+      ]
+    });
     return response;
 
   }
