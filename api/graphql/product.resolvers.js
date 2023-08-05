@@ -27,4 +27,9 @@ const  deleteProduct = async(_, { id }) => {
   return id;
 }
 
-module.exports = { getProduct, getProducts, addProduct, updateProduct, deleteProduct }
+const getProductsByCategory = (parent) => {
+  const id = parent.dataValues.id;
+  return service.getByCategory(id);// dynamic call is an optional call in getCategory
+}
+
+module.exports = { getProduct, getProducts, addProduct, updateProduct, deleteProduct, getProductsByCategory }
