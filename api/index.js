@@ -1,4 +1,4 @@
-// require('dotenv').config({path: './.env'});// first read the  .env variables
+require('dotenv').config({path: './.env'});// first read the  .env variables
 
 const cors = require('cors');// validate routes
 const express = require('express');
