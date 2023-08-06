@@ -2,6 +2,7 @@ const { getProduct, getProducts, addProduct, updateProduct, deleteProduct, getPr
 const { getCategories, getCategory, addCategory, updateCategory, deleteCategory } = require('./category.resolvers');
 const { addCustomer, updateCustomer, deleteCustomer } = require('./customer.resolvers');
 const { login } = require('./auth.resolvers');
+const { addOrder } = require('./order.resolvers');
 const { RegularExpression } = require('graphql-scalars');
 
 const CategoryNameType = new RegularExpression('CategoryNameType', /^[a-zA-Z0-9]{3,8}$/);
@@ -24,6 +25,7 @@ const resolvers = {
     addCustomer,
     updateCustomer,
     deleteCustomer,
+    addOrder,
   },
   CategoryNameType,
   Category: {

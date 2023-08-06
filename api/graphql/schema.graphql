@@ -1,10 +1,12 @@
 type Query {
   #products
-  product(id: ID): Product
+  product(id: ID!): Product
   products: [Product!]!
   #categories
   category(id: ID!): Category
   categories: [Category]!
+  # customer
+  customer(id: ID!): Customer
 }
 
 type Category {
@@ -47,6 +49,14 @@ type Customer {
   user: User!
 }
 
+type Order {
+  id: ID!
+  paid: Boolean!
+  status: String!
+  customer: Customer!
+  items: [Product!]!
+}
+
 type Mutation {
   # product
   addProduct(dto:CreateProductDto!): Product!
@@ -62,6 +72,8 @@ type Mutation {
   addCustomer(dto:CreateCustomerDto!): Customer!
   updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
   deleteCustomer(id: ID!): ID
+  # orders
+  addOrder(dto: CreateOrderDto!): Order
 }
 # product
 input CreateProductDto {
@@ -107,5 +119,12 @@ input UpdateCustomerDto {
   phone: String
   avatar: String
   user: User
+}
+
+#orders
+input CreateOrderDto {
+  customerId: ID!
+  paid: Boolean!
+  status: String!
 }
 
