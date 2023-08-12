@@ -9,7 +9,7 @@ const { typeDefs: scalarsTypeDefs, resolvers: scalarResolvers } = require('graph
 
 const resolvers = require('./resolvers');
 
- const useGraphQL = async (app) => {
+ async function useGraphQL(app) {
   const typeDefs = [
     ...await loadFiles('./api/**/*.graphql'),
     scalarsTypeDefs

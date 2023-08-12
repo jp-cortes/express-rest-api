@@ -1,6 +1,6 @@
 const { GraphQLLocalStrategy } = require('graphql-passport')
 
-const AuthService = require('../services/auth.services');
+const AuthService = require('../../../services/auth.services');
 
 const service = new AuthService();
 

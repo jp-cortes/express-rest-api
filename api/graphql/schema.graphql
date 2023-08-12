@@ -7,8 +7,29 @@ type Query {
   categories: [Category]!
   # customer
   customer(id: ID!): Customer
+  customers: [Customer!]!
   # order
   order: [Order!]!
+}
+
+type Mutation {
+  # product
+  addProduct(dto:CreateProductDto!): Product!
+  updateProduct(id: ID!, dto: UpdateProductDto!): Product
+  deleteProduct(id: ID!): ID
+  # category
+  addCategory(dto:CreateCategoryDto!): Category!
+  updateCategory(id: ID!, dto: UpdateCategoryDto!): Category
+  deleteCategory(id: ID!): ID
+  # user
+  login(email: String!, password: String!): AuthResponse
+  # customer
+  addCustomer(dto:CreateCustomerDto!): Customer!
+  updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
+  deleteCustomer(id: ID!): ID
+  # orders
+  addOrder(dto: CreateOrderDto): Order
+  addItem(dto: ProductToOrderDto): ItemToOrder
 }
 
 type Category {
@@ -36,10 +57,11 @@ type AuthResponse {
 }
 
 type User {
-  id: ID!
+  id: ID
   email: String!
+  password: String
   role: String!
-  createdAt: String!
+  createdAt: String
 }
 
 type Customer {
@@ -48,7 +70,7 @@ type Customer {
   lastName: String!
   phone: String!
   avatar: String!
-  user: User!
+  user: User
 }
 
 type Order {
@@ -59,25 +81,13 @@ type Order {
   items: [Product!]!
 }
 
-type Mutation {
-  # product
-  addProduct(dto:CreateProductDto!): Product!
-  updateProduct(id: ID!, dto: UpdateProductDto!): Product
-  deleteProduct(id: ID!): ID
-  # category
-  addCategory(dto:CreateCategoryDto!): Category!
-  updateCategory(id: ID!, dto: UpdateCategoryDto!): Category
-  deleteCategory(id: ID!): ID
-  # user
-  login(email: String!, password: String!): AuthResponse
-  # customer
-  addCustomer(dto:CreateCustomerDto!): Customer!
-  updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
-  deleteCustomer(id: ID!): ID
-  # orders
-  addOrder(dto: CreateOrderDto!): Order
-  addItem(dto: ProductToOrderDto!): ProductToOrderDto!
+type ItemToOrder {
+  orderId: Int!
+  productId: Int!
+  amount: Int!
 }
+
+
 # product
 input CreateProductDto {
   name: String!
@@ -107,13 +117,21 @@ input UpdateCategoryDto {
   image: String
 }
 
+# users
+input CreateUserDto {
+  id: ID
+  email: String!
+  password: String!
+  role: String
+}
+
 # customer
 input CreateCustomerDto {
   name: String!
   lastName: String!
   phone: String!
   avatar: String
-  user: User!
+  user: CreateUserDto!
 }
 
 input UpdateCustomerDto {
@@ -121,7 +139,7 @@ input UpdateCustomerDto {
   lastName: String
   phone: String
   avatar: String
-  user: User
+  user: CreateUserDto
 }
 
 #orders

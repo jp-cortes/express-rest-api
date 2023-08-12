@@ -1,6 +1,16 @@
 const CustomerService = require('../services/customers.services');
 const service = new CustomerService();
 
+const getCustomers = async() => {
+  const customers = await service.find({});
+  return customers;
+}
+
+const getCustomer = async(_, { id }) => {
+  const customer = await service.findById(id);
+  return customer;
+}
+
 
 const  addCustomer = async(_, { dto }) => {
   const newCustomer = await service.create(dto);
@@ -17,4 +27,4 @@ const  deleteCustomer = async(_, { id }) => {
   return id;
 }
 
-module.exports = {  addCustomer, updateCustomer, deleteCustomer }
+module.exports = { getCustomers, getCustomer, addCustomer, updateCustomer, deleteCustomer }
