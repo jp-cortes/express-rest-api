@@ -56,7 +56,65 @@ NODE_MAILER_APP_PASSWORD=""
 8. Start the server:
 ```npm run dev```
 
-9. Aditional information
+9. Enpoints
+* Start server on **localhost:3000** or the port you rather use
+
+10. Schemas
+* Create a category
+```
+{
+"name": "Category",
+"image": "https://image.com"
+}
+```
+* Create a Product
+ ```
+{
+ "name": "Product 1",
+ "description": "This is a demo product",
+ "image": "https://image.com",
+ "price": 747,
+ "categoryId": 1
+}
+ ```
+* Create an order
+  ```
+  {
+  "paid":true,
+  "status":"on the way"
+  }
+  ```
+  * Relation order products N:N. Do this for every product attached to an order
+  ```
+  {
+  "orderId": 1,
+  "productId": 1,
+  "amount": 2
+  }
+  ```
+  * Create a customer
+  ```
+  {
+  "name": "jhon",
+    "lastName": "doe",
+    "phone": "987-123-456",
+    "avatar": "https://image.com",
+    "user": {
+      "email": "demouse01@mail.com",
+      "password":"Demo_user01",
+      "role": "customer" // You may skip this line. The role is set as customer by default 
+  }
+  ```
+11. interaction with the server Accessing protected routes
+* First you may login 
+    ```
+    {
+      "email":"demouser01@mail.com",
+      "password":"123456789"
+    }
+    ```
+
+12. Aditional information
 * All endpoints in folder routes/index.js
 * You may first create at least 1 category in order to start creating products.
 * Check the set up of the evironment variables in folder config/
