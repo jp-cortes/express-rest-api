@@ -124,6 +124,7 @@ http://localhost:3000/api/v1/auth/login
       "password":"123456789",
       "role": "customer" // You may skip this line. The role is set as customer by default 
   }
+  }
   ```
 11. interaction with the server Accessing protected routes
 * First you may login 
