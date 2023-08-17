@@ -56,7 +56,7 @@ NODE_MAILER_APP_PASSWORD=""
 8. Start the server:
 ```npm run dev```
 
-9. Enpoints
+9. Endpoints
 * Start the server on **http://localhost:3000** or on the port of your choice.
 
 ```
