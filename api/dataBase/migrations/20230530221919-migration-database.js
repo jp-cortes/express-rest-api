@@ -33,6 +33,14 @@ module.exports = {
         allowNull: false,
         type: DataTypes.BOOLEAN,
       },
+      paymentMethod: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      total:{
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
       customerId: {
         field: 'customer_id',
         allowNull: false,

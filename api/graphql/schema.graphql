@@ -52,7 +52,7 @@ type Product {
 }
 
 type AuthResponse {
-  access_token: String!
+  token: String!
   user: User!
 }
 

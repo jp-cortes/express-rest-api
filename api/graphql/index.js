@@ -3,7 +3,7 @@ const { ApolloServer } = require('@apollo/server');
 const { ApolloServerPluginLandingPageLocalDefault } = require('@apollo/server/plugin/landingPage/default')
 const { expressMiddleware } = require('@apollo/server/express4');
 const { loadFiles } = require('@graphql-tools/load-files');
-const { buildContex } = require('graphql-passport');
+const { buildContext } = require('graphql-passport');
 const { typeDefs: scalarsTypeDefs, resolvers: scalarResolvers } = require('graphql-scalars');
 
 
@@ -23,7 +23,7 @@ const resolvers = require('./resolvers');
   const server = new ApolloServer({
     typeDefs,
     resolvers: allResolvers,
-    context: ({ req, res }) => buildContex({ req, res }),
+    // context: ({ req, res }) => buildContext({ req, res }),
     playground: true,
     plugins: [
       ApolloServerPluginLandingPageLocalDefault
@@ -32,8 +32,11 @@ const resolvers = require('./resolvers');
 
   await server.start();
 
-  app.use(expressMiddleware(server, {
-    context: async ({req}) => ({
+  app.use(
+    expressMiddleware(server, {
+    context: async ({ req, res }) => buildContext({
+      req,
+      res,
       token: req.headers.token
     })
   }))
