@@ -32,12 +32,12 @@ const resolvers = require('./resolvers');
 
   await server.start();
 
-  app.use(
+  app.use('/graphql',
     expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({
       req,
       res,
-      token: req.headers.token
+      token: req.headers.authorization
     })
   }))
 

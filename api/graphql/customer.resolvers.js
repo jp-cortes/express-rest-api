@@ -1,7 +1,13 @@
+const { checkJwtGql } = require('../utils/checkJwtGql');
+const { checkRolesGql } = require('../utils/checkRolesGql');
+
+
 const CustomerService = require('../services/customers.services');
 const service = new CustomerService();
 
-const getCustomers = async() => {
+const getCustomers = async(_, _dto, context) => {
+  const user = await checkJwtGql(context);
+  checkRolesGql(user, 'admin');
   const customers = await service.find({});
   return customers;
 }

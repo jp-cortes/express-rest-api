@@ -9,7 +9,7 @@ type Query {
   customer(id: ID!): Customer
   customers: [Customer!]!
   # order
-  order: [Order!]!
+  order: [Order]
 }
 
 type Mutation {
@@ -60,6 +60,7 @@ type User {
   id: ID
   email: String!
   password: String
+  recoveryToken: String
   role: String!
   createdAt: String
 }
@@ -78,7 +79,7 @@ type Order {
   paid: Boolean!
   status: String!
   customer: Customer!
-  items: [Product!]!
+  items: [Product]
 }
 
 type ItemToOrder {
@@ -144,7 +145,7 @@ input UpdateCustomerDto {
 
 #orders
 input CreateOrderDto {
-  customerId: ID!
+  # customerId: ID!
   paid: Boolean!
   status: String!
 }

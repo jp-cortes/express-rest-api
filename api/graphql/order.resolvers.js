@@ -5,7 +5,7 @@ const { checkRolesGql } = require('../utils/checkRolesGql');
 const OrderService = require('../services/orders.services');
 const service = new OrderService();
 
-const getOrders = async(_, context) => {
+const getOrders = async(_, _dto, context) => {
   const user = await checkJwtGql(context);
   checkRolesGql(user, 'admin');
   const orders = await service.find({});
@@ -13,9 +13,11 @@ const getOrders = async(_, context) => {
 }
 
 const  addOrder = async(_, { dto }, context) => {
+  console.log(context.req.customer, 'context')
   await checkJwtGql(context);
-  const newCustomer = await service.create(dto);
-  return newCustomer;
+  const body = { userId: context.req.user, ...dto };
+  const newOrder = await service.create(body);
+  return newOrder;
 }
 
 const  addProductToOrder = async(_, { dto }, context) => {
