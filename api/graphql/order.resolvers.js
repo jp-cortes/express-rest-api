@@ -15,8 +15,7 @@ const getOrders = async(_, _dto, context) => {
 const  addOrder = async(_, { dto }, context) => {
   console.log(context.req.customer, 'context')
   await checkJwtGql(context);
-  const body = { userId: context.req.user, ...dto };
-  const newOrder = await service.create(body);
+  const newOrder = await service.create(dto);
   return newOrder;
 }
 
