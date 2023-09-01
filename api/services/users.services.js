@@ -27,9 +27,10 @@ class UsersService {
     return user;
   }
 //find  user by id
-  async findById(id) {
-    const user = models.User.findByPk(id, {
-      include: ['customer']
+  async findById(data) {
+    // console.log(data.userId, 'data')
+    const user = models.User.findByPk(data.userId, {
+      include: ['customer']// error sub is undefined
     });
     if(!user) {
       throw boom.notFound('user not found');
