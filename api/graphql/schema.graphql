@@ -145,7 +145,7 @@ input UpdateCustomerDto {
 
 #orders
 input CreateOrderDto {
-  # customerId: ID!
+  userId: ID!
   paid: Boolean!
   status: String!
 }

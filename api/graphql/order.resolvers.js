@@ -13,7 +13,8 @@ const getOrders = async(_, _dto, context) => {
 }
 
 const  addOrder = async(_, { dto }, context) => {
-  console.log(context.req.customer, 'context')
+  // const user = context.getUser()
+  // console.log(user, 'context')
   await checkJwtGql(context);
   const newOrder = await service.create(dto);
   return newOrder;

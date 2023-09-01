@@ -36,8 +36,8 @@ const resolvers = require('./resolvers');
     expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({
       req,
-      res,
-      token: req.headers.authorization
+      res
+      // token: req.headers.authorization
     })
   }))
 
