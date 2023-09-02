@@ -44,7 +44,8 @@ class OrdersService {
       },
       include: [
         {
-          association: 'customer'
+          association: 'customer',
+          include: ['user']
         }
       ]
     });
