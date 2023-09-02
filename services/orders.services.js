@@ -37,15 +37,14 @@ class OrdersService {
     return newOrder;
   }
 //find order by user id
-  async findByUserId(userId) {
+  async findByUserId(data) {
     const order = models.Order.findAll({
       where: {
-        '$customer.user.id$': userId
+        '$customer.user.id$': data.userId
       },
       include: [
         {
-          association: 'customer',
-          include: ['user']
+          association: 'customer'
         }
       ]
     });
