@@ -16,11 +16,11 @@ router.get('/', async (req, res) => {
 });
 
 //user by id
-router.get('/:id',
-validatorHandler(getUserSchema, 'params'),
+router.get('/account',
+passport.authenticate('jwt', { session: false }),
  async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = { userId:req.user.sub };
     const user = await service.findById(id);
     res.status(200).json(user);
   } catch (error) {

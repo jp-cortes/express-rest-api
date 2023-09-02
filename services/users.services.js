@@ -27,8 +27,8 @@ class UsersService {
     return user;
   }
 //find  user by id
-  async findById(id) {
-    const user = models.User.findByPk(id,{
+  async findById(data) {
+    const user = models.User.findByPk(data.userId,{
       include: ['customer']
       });
     if(!user) {
