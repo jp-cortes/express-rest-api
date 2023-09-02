@@ -28,9 +28,9 @@ class UsersService {
   }
 //find  user by id
   async findById(data) {
-    // console.log(data.userId, 'data')
+    //get user id from jwt token
     const user = models.User.findByPk(data.userId, {
-      include: ['customer']// error sub is undefined
+      include: ['customer']
     });
     if(!user) {
       throw boom.notFound('user not found');

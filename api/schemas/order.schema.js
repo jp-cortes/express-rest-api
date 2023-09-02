@@ -21,9 +21,9 @@ const updateOrderSchema = Joi.object({
   status: status.required()
 });
 
-const getOrderSchema = Joi.object({
-  id: id.required(),
-});
+// const getOrderSchema = Joi.object({
+//   id: id.required(),
+// });
 
 const addItemSchema = Joi.object({
   orderId: orderId.required(),
@@ -31,4 +31,4 @@ const addItemSchema = Joi.object({
   amount: amount.required(),
 });
 
-module.exports = { createOrderSchema, updateOrderSchema, getOrderSchema, addItemSchema }
+module.exports = { createOrderSchema, updateOrderSchema, addItemSchema }
