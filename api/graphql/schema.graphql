@@ -7,9 +7,13 @@ type Query {
   categories: [Category]!
   # customer
   customer(id: ID!): Customer
-  customers: [Customer!]!
+  customers: [Customer]!
+  # user
+  users: [User]!
+  user: User
   # order
   order: [Order]
+  getOrdersByUser: [Order]
 }
 
 type Mutation {
@@ -27,6 +31,10 @@ type Mutation {
   addCustomer(dto:CreateCustomerDto!): Customer!
   updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
   deleteCustomer(id: ID!): ID
+  # user
+  addUser(dto:CreateUserDto!): User!
+  updateUser(id: ID!, dto: UpdateCustomerDto!): User
+  deleteUser(id: ID!): ID
   # orders
   addOrder(dto: CreateOrderDto): Order
   addItem(dto: ProductToOrderDto): ItemToOrder
@@ -63,6 +71,10 @@ type User {
   recoveryToken: String
   role: String!
   createdAt: String
+  customer: Customer
+}
+type UserAccount {
+    account: User
 }
 
 type Customer {
@@ -125,6 +137,12 @@ input CreateUserDto {
   password: String!
   role: String
 }
+input UpdateUserDto {
+  id: ID!
+  email: String
+  password: String
+  role: String
+}
 
 # customer
 input CreateCustomerDto {
@@ -145,9 +163,11 @@ input UpdateCustomerDto {
 
 #orders
 input CreateOrderDto {
-  userId: ID!
+  userId: ID
   paid: Boolean!
   status: String!
+  paymentMethod: String!
+  total: Int!
 }
 # addItems
 input ProductToOrderDto {

@@ -12,7 +12,8 @@ const getCustomers = async(_, _dto, context) => {
   return customers;
 }
 
-const getCustomer = async(_, { id }) => {
+const getCustomer = async(_, { id }, context) => {
+  await checkJwtGql(context);
   const customer = await service.findById(id);
   return customer;
 }
@@ -23,7 +24,8 @@ const  addCustomer = async(_, { dto }) => {
   return newCustomer;
 }
 
-const  updateCustomer = async(_, { id, dto }) => {
+const  updateCustomer = async(_, { id, dto }, context) => {
+  await checkJwtGql(context);
   const customer = await service.update(id, dto);
   return customer;
 }

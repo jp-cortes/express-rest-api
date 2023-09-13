@@ -12,11 +12,16 @@ const getOrders = async(_, _dto, context) => {
   return orders;
 }
 
+const getOrdersByUser = async(_, __, context) => {
+  const user = await checkJwtGql(context);
+  const id = { userId:user.sub };
+  const orders = await service.findByUserId(id);
+  return orders;
+}
 const  addOrder = async(_, { dto }, context) => {
-  // const user = context.getUser()
-  // console.log(user, 'context')
-  await checkJwtGql(context);
-  const newOrder = await service.create(dto);
+  const user = await checkJwtGql(context);
+  const body = { userId:user.sub, ...dto };
+  const newOrder = await service.create(body);
   return newOrder;
 }
 
@@ -26,4 +31,4 @@ const  addProductToOrder = async(_, { dto }, context) => {
   return item;
 }
 
-module.exports = { getOrders, addOrder, addProductToOrder };
+module.exports = { getOrders, getOrdersByUser, addOrder, addProductToOrder };
