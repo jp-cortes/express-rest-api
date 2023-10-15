@@ -15,7 +15,7 @@ const createApp = async () => {
   app.use(express.json());
 
   // example for specific url
-  const whitelist = [`${process.env.SERVER}`, 'http://localhost:3500'];
+  const whitelist = [`${process.env.SERVER}`, 'http://localhost:3001'];
 
   const corsOptionsDelegate = (req, callback) => {
     let corsOptions;

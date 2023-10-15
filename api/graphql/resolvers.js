@@ -6,7 +6,7 @@ const { login } = require('./auth.resolvers');
 const { getOrders, getOrdersByUser, addOrder, addProductToOrder } = require('./order.resolvers');
 const { RegularExpression } = require('graphql-scalars');
 
-const CategoryNameType = new RegularExpression('CategoryNameType', /^[a-zA-Z0-9]{3,8}$/);
+const CategoryNameType = new RegularExpression('CategoryNameType', /^[a-zA-Z0-9]{3,20}$/);
 
 const resolvers = {
   Query: {

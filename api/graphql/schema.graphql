@@ -4,7 +4,7 @@ type Query {
   products: [Product!]!
   #categories
   category(id: ID!): Category
-  categories: [Category]!
+  categories: [Category!]!
   # customer
   customer(id: ID!): Customer
   customers: [Customer]!
