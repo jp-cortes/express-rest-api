@@ -14,18 +14,16 @@
 
 # Installation
 1. Clone the repository:
-
 ```git clone git@github.com:jp-cortes/express-rest-api.git```
 
 2. Change into the project directory:
-
 ```cd express-rest-api```
 
 3. Install the dependencies:
-
 ```npm install```
+
 4. Create a .env file in the root directory and configure the following environment variables:
-* Check .env.example fila as reference
+* Check .env.example file as reference
 ```
 # express
 PORT="5432"   # or your PostgreSQL port
@@ -51,15 +49,108 @@ NODE_MAILER_APP_PASSWORD=""
 ```
 5. Run docker:
 ```docker compose up -d```
-6. Run the database migrations:
 
+7. Run the database migrations:
 ```npm run migrations:run```
-7. Start the server:
+
+8. Start the server:
 ```npm run dev```
 
-8. Aditional information
+9. Endpoints
+* Start the server on **http://localhost:3000** or on the port of your choice.
+
+```
+// products
+http://localhost:3000/api/v1/products
+
+// categories
+http://localhost:3000/api/v1/categories
+
+// orders protected route
+http://localhost:3000/api/v1/orders
+
+// relation orders to products N:N 
+http://localhost:3000/api/v1/orders/add-item
+
+// customers
+http://localhost:3000/api/v1/customers
+
+// login
+http://localhost:3000/api/v1/auth/login
+```
+
+10. Schemas
+* Create a category
+```
+{
+  "name": "Category",
+  "image": "https://image.com"
+}
+```
+* Create a Product
+ ```
+{
+   "name": "Product 1",
+   "description": "This is a demo product",
+   "image": "https://image.com",
+   "price": 747,
+   "categoryId": 1
+}
+ ```
+* Create an order
+  ```
+  {
+    "paid":true,
+    "status":"on the way"
+  }
+  ```
+  * Relation order products N:N. Do this for every product attached to an order
+  ```
+  {
+    "orderId": 1,
+    "productId": 1,
+    "amount": 2
+  }
+  ```
+  * Create a customer
+  ```
+  {
+    "name": "jhon",
+    "lastName": "doe",
+    "phone": "987-123-456",
+    "avatar": "https://image.com",
+    "user": {
+      "email": "demouse01@mail.com",
+      "password":"123456789",
+      "role": "customer" // You may skip this line. The role is set as customer by default 
+  }
+  }
+  ```
+11. interaction with the server Accessing protected routes
+* First you may login 
+    ```
+    {
+        "email":"demouser01@mail.com",
+        "password":"123456789"
+    }
+    ```
+* Server may response
+```
+{
+   "user": {
+        "id": 1,
+        "email": "demouser@mail.com",
+        "role": "customer",
+        "createdAt": "2023-08-12T10:33:50.639Z"
+    },
+    "token": "example" // use this token as header to access the protected routes
+}
+```
+**Note that many routes provide exclusive access to the admin and seller roles. Check the folder route for mor information**
+
+12. Aditional information
 * All endpoints in folder routes/index.js
-* You may first create at least 10 categories in order to start creating products.
+* You may first create at least 1 category in order to start creating products.
 * Check the set up of the evironment variables in folder config/
 * For migrations check the file dataBase/
 * For Schemas validation with joi check folder schemas/
@@ -71,9 +162,10 @@ NODE_MAILER_APP_PASSWORD=""
 The project is divided into three branches, each representing a different version of the backend:
 
 * main: The stable version of the backend, suitable for production use.
-* development-postgres: The branch for ongoing development with **postgreSQL ang pdadmin**, containing the latest features and bug fixes.
-* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixes.
-* express: A branch with a raw version fully functional. Running in Node.js
+* development-postgres: The branch for ongoing development with **postgreSQL and pgdadmin**, containing the latest features and bug fixed.
+* development-mySql:The branch for ongoing development with **mySQL and phpmyadmin**, containing the latest features and bug fixed.
+* development-graphQL:The branch for ongoing development with **PostgreSQL and GraphQL**, containing the latest features and bug fixed.
+* express: A branch with a raw version fully functional. Running in **Node.js**
 
 # Contributing
 We welcome contributions to help improve this project. To contribute, please follow these steps:
