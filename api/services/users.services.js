@@ -28,8 +28,7 @@ class UsersService {
   }
 //find  user by id
   async findById(data) {
-    //get user id from jwt token
-    const user = models.User.findByPk(data.userId, {
+    const user = models.User.findByPk(data.userId,{
       include: ['customer']
     });
     if(!user) {

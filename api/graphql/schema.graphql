@@ -1,0 +1,177 @@
+type Query {
+  #products
+  product(id: ID!): Product
+  products: [Product!]!
+  #categories
+  category(id: ID!): Category
+  categories: [Category]!
+  # customer
+  customer(id: ID!): Customer
+  customers: [Customer]!
+  # user
+  users: [User]!
+  user: User
+  # order
+  order: [Order]
+  getOrdersByUser: [Order]
+}
+
+type Mutation {
+  # product
+  addProduct(dto:CreateProductDto!): Product!
+  updateProduct(id: ID!, dto: UpdateProductDto!): Product
+  deleteProduct(id: ID!): ID
+  # category
+  addCategory(dto:CreateCategoryDto!): Category!
+  updateCategory(id: ID!, dto: UpdateCategoryDto!): Category
+  deleteCategory(id: ID!): ID
+  # user
+  login(email: String!, password: String!): AuthResponse
+  # customer
+  addCustomer(dto:CreateCustomerDto!): Customer!
+  updateCustomer(id: ID!, dto: UpdateCustomerDto!): Customer
+  deleteCustomer(id: ID!): ID
+  # user
+  addUser(dto:CreateUserDto!): User!
+  updateUser(id: ID!, dto: UpdateCustomerDto!): User
+  deleteUser(id: ID!): ID
+  # orders
+  addOrder(dto: CreateOrderDto): Order
+  addItem(dto: ProductToOrderDto): ItemToOrder
+}
+
+type Category {
+  id: ID!
+  name: String!
+  image: String!
+  products: [Product]
+  createdAt: String!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  createdAt: String!
+  categoryId: ID!
+  category: Category!
+}
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID
+  email: String!
+  password: String
+  recoveryToken: String
+  role: String!
+  createdAt: String
+  customer: Customer
+}
+type UserAccount {
+    account: User
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  lastName: String!
+  phone: String!
+  avatar: String!
+  user: User
+}
+
+type Order {
+  id: ID!
+  paid: Boolean!
+  status: String!
+  customer: Customer!
+  items: [Product]
+}
+
+type ItemToOrder {
+  orderId: Int!
+  productId: Int!
+  amount: Int!
+}
+
+
+# product
+input CreateProductDto {
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  categoryId: ID!
+}
+
+input UpdateProductDto {
+  name: String
+  price: Float
+  description: String
+  image: String
+  categoryId: ID
+}
+
+# category
+input CreateCategoryDto {
+  name: CategoryNameType!
+  image: URL!
+}
+scalar CategoryNameType
+
+input UpdateCategoryDto {
+  name: String
+  image: String
+}
+
+# users
+input CreateUserDto {
+  id: ID
+  email: String!
+  password: String!
+  role: String
+}
+input UpdateUserDto {
+  id: ID!
+  email: String
+  password: String
+  role: String
+}
+
+# customer
+input CreateCustomerDto {
+  name: String!
+  lastName: String!
+  phone: String!
+  avatar: String
+  user: CreateUserDto!
+}
+
+input UpdateCustomerDto {
+  name: String
+  lastName: String
+  phone: String
+  avatar: String
+  user: CreateUserDto
+}
+
+#orders
+input CreateOrderDto {
+  userId: ID
+  paid: Boolean!
+  status: String!
+  paymentMethod: String!
+  total: Int!
+}
+# addItems
+input ProductToOrderDto {
+  orderId: Int!
+  productId: Int!
+  amount: Int!
+}

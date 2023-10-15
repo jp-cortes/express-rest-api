@@ -24,7 +24,8 @@ class OrdersService {
 
     const newOrder = await models.Order.create({
       customerId: customer.id,
-      status: data.status, paid: data.paid
+      status: data.status,
+      paid: data.paid
     });
 
     return newOrder;

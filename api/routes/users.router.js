@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 //user by id
 router.get('/account',
-passport.authenticate('jwt', { session: false }),
+validatorHandler(getUserSchema, 'params'),
  async (req, res, next) => {
   try {
     const id = { userId:req.user.sub };

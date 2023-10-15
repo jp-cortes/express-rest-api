@@ -78,7 +78,9 @@ class ProductsService {
     return { res: true };
   }
 
-
+ async getByCategory(id) {
+  return await models.Product.findAll({ where: { categoryId: id }});
+ }
 
 }
 
