@@ -51,7 +51,7 @@ type Category {
 type Product {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   description: String!
   image: String!
   createdAt: String!
@@ -123,6 +123,7 @@ input CreateCategoryDto {
   name: CategoryNameType!
   image: URL!
 }
+
 scalar CategoryNameType
 
 input UpdateCategoryDto {
