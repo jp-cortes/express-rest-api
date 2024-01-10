@@ -20,8 +20,8 @@ router.get('/account',
 passport.authenticate('jwt', { session: false }),
  async (req, res, next) => {
   try {
-    const id = { userId:req.user.sub };
-    const user = await service.findById(id);
+    const userId  = req.user.sub;
+    const user = await service.findById(userId);
     res.status(200).json(user);
   } catch (error) {
     next(error);// will show the error from the middleware folder
