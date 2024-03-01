@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // example for specific url
-const whitelist = [`${process.env.SERVER}`, 'http://localhost:3000', 'http://localhost:4200'];
+const whitelist = [`${process.env.SERVER}`, 'http://localhost:3000', 'http://localhost:4200', `${process.env.ANGULAR_SERVER}`];
 
 const corsOptionsDelegate = (req, callback) => {
   let corsOptions;
